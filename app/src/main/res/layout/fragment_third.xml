@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main"
+    android:backgroundTint="@color/color_main"
+    tools:context=".presentation.fragments.fragments_view_pager.ThirdFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_fragment_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/third_fragment_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_fragment_third"
+        android:layout_width="279dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/gothampro_bold"
+        android:lineHeight="38dp"
+        android:maxLines="2"
+        android:text="@string/title_fragment_third"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textColor="@color/color_main_second"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_fragment_third" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description_fragment_third"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/gothampro"
+        android:lineHeight="19dp"
+        android:text="@string/description_fragment_third"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_fragment_third" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next_main_page"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/background_btn_start_page"
+        android:fontFamily="@font/gothampro_medium"
+        android:text="@string/text_btn_start_page"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

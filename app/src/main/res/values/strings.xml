@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">IT CRON</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_no_internet_connection">Нет интернет соединения</string>
+    <string name="title_fragment_first">Проектный подход</string>
+    <string name="description_fragment_first">Качественно организовываем деятельность для заимодействия наших сотрудников и Заказчика</string>
+    <string name="text_btn_next_page">Далее</string>
+    <string name="title_fragment_second">Продуктовый подход</string>
+    <string name="description_fragment_second">Оказываем услуги\nи выдаём тот результат, который необходим Заказчику и рынку</string>
+    <string name="title_fragment_third">Кейсы</string>
+    <string name="description_fragment_third">Понравился продукт? Хотите его обсудить? Мы с радостью\nответим на все ваши вопросы :)</string>
+    <string name="text_btn_start_page">Начать</string>
+
+    <!--  string fragments  -->
+    <string name="text_is_null_binding_first_fragment">FragmentFirstBinding is null</string>
+    <string name="text_is_null_binding_second_fragment">FragmentSecondBinding is null</string>
+    <string name="text_is_null_binding_third_fragment">FragmentThirdBinding is null</string>
+    <string name="text_is_null_binding_main_fragment">FragmentMainBinding is null</string>
+    <string name="text_is_null_binding_no_internet_fragment">
+        FragmentNoInternetBinding is null
+    </string>
+    <string name="text_is_null_binding_view_pager_fragment">
+        FragmentViewPagerBinding is null
+    </string>
+    <string name="text_error_no_implements_interface">
+        Must implements interface NavigateHelper
+    </string>
+    <string name="text_key_shared_preferences_on_boarding">
+        onBoarding
+    </string>
+    <string name="text_extra_finished_on_boarding">
+        Finished
+    </string>
+    <!--  string fragments  -->
+
+</resources>
