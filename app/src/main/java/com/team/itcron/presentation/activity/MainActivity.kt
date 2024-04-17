@@ -2,9 +2,13 @@ package com.team.itcron.presentation.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -16,8 +20,12 @@ import com.team.itcron.databinding.ActivityMainBinding
 import com.team.itcron.presentation.fragments.MainFragment
 import com.team.itcron.presentation.fragments.NoInternetFragment
 import com.team.itcron.presentation.fragments.ViewPagerFragment
-import com.team.itcron.presentation.fragments.fragments_view_pager.ThirdFragment
 import com.team.itcron.presentation.navigate.NavigateHelper
+import com.team.itcron.presentation.view_models.MainViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), NavigateHelper {
 
@@ -43,21 +51,29 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         cicerone.router
     }
 
+    private val viewModel by viewModel<MainViewModel>()
+
     private lateinit var networkChecker: NetworkChecker
+
+    private lateinit var splashScreen: SplashScreen
+
+    private var isLoadedInfo = true
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        startSplashScreen()
+        splashScreen = installSplashScreen().apply {
+            setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
+                isLoadedInfo
+            })
+        }
+        viewModel.getMenu()
         setContentView(binding.root)
+        observeViewModel()
         networkChecker = NetworkChecker(this)
         checkConnectToInternet()
-        if (onBoardingFinished()) {
-            navigateTo(MainFragment.newInstance())
-        } else {
-            navigateTo(ViewPagerFragment.newInstance())
-        }
+        checkingActivationIsOnBoarding()
     }
 
     override fun onResume() {
@@ -73,11 +89,6 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
 
     override fun navigateTo(fragment: Fragment) {
         router.navigateTo(FragmentScreen { fragment })
-    }
-
-    private fun startSplashScreen() {
-        Thread.sleep(1800)
-        installSplashScreen()
     }
 
     private fun checkConnectToInternet() {
@@ -97,5 +108,33 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
             getString(R.string.text_extra_finished_on_boarding),
             false
         )
+    }
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.isLoadSplash.collect { isLoadSplash ->
+                if (!isLoadSplash) {
+                    isLoadedInfo = false
+                    viewModel.menu.onEach { menu ->
+                        Log.d("MainActivity", menu.toString())
+                    }.collect()
+                } else {
+                    isLoadedInfo = true
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Error in server",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun checkingActivationIsOnBoarding() {
+        if (onBoardingFinished()) {
+            navigateTo(MainFragment.newInstance())
+        } else {
+            navigateTo(ViewPagerFragment.newInstance())
+        }
     }
 }
