@@ -32,6 +32,21 @@
     <string name="text_extra_finished_on_boarding">
         Finished
     </string>
+    <string name="text_id_app_facebook">com.facebook.katana</string>
+    <string name="text_id_app_instagram">com.instagram.android</string>
+    <string name="text_id_app_telegram">org.telegram.messenger</string>
+    <string name="text_link_facebook">https://www.facebook.com/it.cron.ru/</string>
+    <string name="text_link_instagram">https://www.instagram.com/itcron/?hl=ru</string>
+    <string name="text_link_telegram"> https://t.me/+NnhpGqJYWAU2MDIy</string>
     <!--  string fragments  -->
+
+    <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
+    <string name="text_cases">Кейсы</string>
+    <string name="text_company">Компания</string>
+    <string name="text_services">Услуги</string>
+    <string name="text_contacts">Контакты</string>
+    <string name="text_email_company">hello@it-cron.ru</string>
+    <string name="text_send_request">Оставить заявку</string>
+
 
 </resources>

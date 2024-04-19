@@ -60,19 +60,25 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
     private var isLoadedInfo = true
 
     // ****** lifecycle *****
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        networkChecker = NetworkChecker(this)
+
         splashScreen = installSplashScreen().apply {
             setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
+                if (isLoadedInfo == true) {
+                    checkConnectToInternet()
+                    isLoadedInfo = false
+                }
                 isLoadedInfo
             })
         }
-        viewModel.getMenu()
+
         setContentView(binding.root)
+        viewModel.getMenu()
         observeViewModel()
-        networkChecker = NetworkChecker(this)
-        checkConnectToInternet()
         checkingActivationIsOnBoarding()
     }
 
