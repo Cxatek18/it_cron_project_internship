@@ -3,11 +3,11 @@ package com.team.itcron.presentation.activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
@@ -23,6 +23,7 @@ import com.team.itcron.presentation.fragments.ViewPagerFragment
 import com.team.itcron.presentation.navigate.NavigateHelper
 import com.team.itcron.presentation.view_models.MainViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,13 +52,11 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         cicerone.router
     }
 
-    private val viewModel by viewModel<MainViewModel>()
+    private val mainViewModel by viewModel<MainViewModel>()
 
     private lateinit var networkChecker: NetworkChecker
 
     private lateinit var splashScreen: SplashScreen
-
-    private var isLoadedInfo = true
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +64,10 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         binding = ActivityMainBinding.inflate(layoutInflater)
         splashScreen = installSplashScreen().apply {
             setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
-                isLoadedInfo
+                mainViewModel.isLoadSplash.value
             })
         }
-        viewModel.getMenu()
+        mainViewModel.getMenu()
         setContentView(binding.root)
         observeViewModel()
         networkChecker = NetworkChecker(this)
@@ -112,21 +111,11 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
 
     private fun observeViewModel() {
         lifecycleScope.launch {
-            viewModel.isLoadSplash.collect { isLoadSplash ->
-                if (!isLoadSplash) {
-                    isLoadedInfo = false
-                    viewModel.menu.onEach { menu ->
-                        Log.d("MainActivity", menu.toString())
-                    }.collect()
-                } else {
-                    isLoadedInfo = true
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Error in server",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
+            mainViewModel.menu.flowWithLifecycle(lifecycle)
+                .filterNotNull()
+                .onEach { menu ->
+                    Log.d("MainActivity", menu.toString())
+                }.collect()
         }
     }
 
