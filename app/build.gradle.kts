@@ -51,6 +51,11 @@ dependencies {
     // Splash API
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    //Cicerone
+    // Cicerone
     implementation("com.github.terrakok:cicerone:7.1")
+
+    // Koin
+    implementation("io.insert-koin:koin-android:3.5.3")
+    implementation("io.insert-koin:koin-core:3.5.3")
+    implementation("io.insert-koin:koin-test:3.5.3")
 }
