@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.ITCRON" parent="Theme.Material3.DayNight.NoActionBar">
+         <item name="colorPrimary">@color/color_main</item>
+    </style>
+
+    <style name="Theme.ITCRON" parent="Base.Theme.ITCRON" />
+
+    <style name="Theme.ITCRON.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/color_main</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splashscreen</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.ITCRON</item>
+    </style>
+</resources>
