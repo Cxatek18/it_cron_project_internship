@@ -78,10 +78,6 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
         router.navigateTo(FragmentScreen { fragment })
     }
 
-    private fun startSplashScreen() {
-        installSplashScreen()
-    }
-
     private fun checkConnectToInternet() {
         networkChecker.observe(this) {
             if (!it) {
