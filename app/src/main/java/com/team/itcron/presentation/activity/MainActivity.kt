@@ -9,7 +9,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -26,9 +25,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), NavigateHelper {
+class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -40,22 +41,10 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         )
     }
 
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-
-    private val navigatorHolder: NavigatorHolder by lazy {
-        cicerone.getNavigatorHolder()
-    }
-
-    private val router: Router by lazy {
-        cicerone.router
-    }
-
+    private val navigatorHolder: NavigatorHolder by inject<NavigatorHolder>()
+    private val router: Router by inject<Router>()
+    private val networkChecker: NetworkChecker by inject<NetworkChecker>()
     private val mainViewModel by viewModel<MainViewModel>()
-
-    private lateinit var networkChecker: NetworkChecker
-
     private lateinit var splashScreen: SplashScreen
 
     // ****** lifecycle *****
@@ -70,7 +59,6 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         mainViewModel.getMenu()
         setContentView(binding.root)
         observeViewModel()
-        networkChecker = NetworkChecker(this)
         checkConnectToInternet()
         checkingActivationIsOnBoarding()
     }
@@ -88,6 +76,10 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
 
     override fun navigateTo(fragment: Fragment) {
         router.navigateTo(FragmentScreen { fragment })
+    }
+
+    private fun startSplashScreen() {
+        installSplashScreen()
     }
 
     private fun checkConnectToInternet() {
