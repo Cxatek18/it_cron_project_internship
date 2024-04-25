@@ -25,9 +25,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
 
@@ -104,6 +104,15 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
                 .onEach { menu ->
                     Log.d("MainActivity", menu.toString())
                 }.collect()
+        }
+
+        lifecycleScope.launch {
+            mainViewModel.isOnline.flowWithLifecycle(lifecycle)
+                .collect {
+                    if (!it) {
+                        navigateTo(NoInternetFragment.newInstance())
+                    }
+                }
         }
     }
 
