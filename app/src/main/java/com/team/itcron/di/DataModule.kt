@@ -18,7 +18,6 @@ val dataModule = module {
     single<ApiService> {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        httpLoggingInterceptor
         val client = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()

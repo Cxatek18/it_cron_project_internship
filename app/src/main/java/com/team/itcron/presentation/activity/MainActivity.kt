@@ -3,13 +3,12 @@ package com.team.itcron.presentation.activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -23,11 +22,14 @@ import com.team.itcron.presentation.fragments.ViewPagerFragment
 import com.team.itcron.presentation.navigate.NavigateHelper
 import com.team.itcron.presentation.view_models.MainViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MainActivity : AppCompatActivity(), NavigateHelper {
+class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -39,46 +41,25 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
         )
     }
 
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-
-    private val navigatorHolder: NavigatorHolder by lazy {
-        cicerone.getNavigatorHolder()
-    }
-
-    private val router: Router by lazy {
-        cicerone.router
-    }
-
-    private val viewModel by viewModel<MainViewModel>()
-
-    private lateinit var networkChecker: NetworkChecker
-
+    private val navigatorHolder: NavigatorHolder by inject<NavigatorHolder>()
+    private val router: Router by inject<Router>()
+    private val networkChecker: NetworkChecker by inject<NetworkChecker>()
+    private val mainViewModel by viewModel<MainViewModel>()
     private lateinit var splashScreen: SplashScreen
 
-    private var isLoadedInfo = true
-
     // ****** lifecycle *****
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        networkChecker = NetworkChecker(this)
-
         splashScreen = installSplashScreen().apply {
             setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
-                if (isLoadedInfo == true) {
-                    checkConnectToInternet()
-                    isLoadedInfo = false
-                }
-                isLoadedInfo
+                mainViewModel.isLoadSplash.value
             })
         }
-
+        mainViewModel.getMenu()
         setContentView(binding.root)
-        viewModel.getMenu()
         observeViewModel()
+        checkConnectToInternet()
         checkingActivationIsOnBoarding()
     }
 
@@ -118,21 +99,20 @@ class MainActivity : AppCompatActivity(), NavigateHelper {
 
     private fun observeViewModel() {
         lifecycleScope.launch {
-            viewModel.isLoadSplash.collect { isLoadSplash ->
-                if (!isLoadSplash) {
-                    isLoadedInfo = false
-                    viewModel.menu.onEach { menu ->
-                        Log.d("MainActivity", menu.toString())
-                    }.collect()
-                } else {
-                    isLoadedInfo = true
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Error in server",
-                        Toast.LENGTH_LONG
-                    ).show()
+            mainViewModel.menu.flowWithLifecycle(lifecycle)
+                .filterNotNull()
+                .onEach { menu ->
+                    Log.d("MainActivity", menu.toString())
+                }.collect()
+        }
+
+        lifecycleScope.launch {
+            mainViewModel.isOnline.flowWithLifecycle(lifecycle)
+                .collect {
+                    if (!it) {
+                        navigateTo(NoInternetFragment.newInstance())
+                    }
                 }
-            }
         }
     }
 
