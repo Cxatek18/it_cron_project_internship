@@ -2,9 +2,13 @@ package com.team.itcron.presentation.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -16,6 +20,12 @@ import com.team.itcron.presentation.fragments.MainFragment
 import com.team.itcron.presentation.fragments.NoInternetFragment
 import com.team.itcron.presentation.fragments.ViewPagerFragment
 import com.team.itcron.presentation.navigate.NavigateHelper
+import com.team.itcron.presentation.view_models.MainViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -34,19 +44,23 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
     private val navigatorHolder: NavigatorHolder by inject<NavigatorHolder>()
     private val router: Router by inject<Router>()
     private val networkChecker: NetworkChecker by inject<NetworkChecker>()
+    private val mainViewModel by viewModel<MainViewModel>()
+    private lateinit var splashScreen: SplashScreen
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        startSplashScreen()
-        setContentView(binding.root)
-        checkConnectToInternet()
-        if (onBoardingFinished()) {
-            navigateTo(MainFragment.newInstance())
-        } else {
-            navigateTo(ViewPagerFragment.newInstance())
+        splashScreen = installSplashScreen().apply {
+            setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
+                mainViewModel.isLoadSplash.value
+            })
         }
+        mainViewModel.getMenu()
+        setContentView(binding.root)
+        observeViewModel()
+        checkConnectToInternet()
+        checkingActivationIsOnBoarding()
     }
 
     override fun onResume() {
@@ -62,10 +76,6 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
 
     override fun navigateTo(fragment: Fragment) {
         router.navigateTo(FragmentScreen { fragment })
-    }
-
-    private fun startSplashScreen() {
-        installSplashScreen()
     }
 
     private fun checkConnectToInternet() {
@@ -85,5 +95,32 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
             getString(R.string.text_extra_finished_on_boarding),
             false
         )
+    }
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            mainViewModel.menu.flowWithLifecycle(lifecycle)
+                .filterNotNull()
+                .onEach { menu ->
+                    Log.d("MainActivity", menu.toString())
+                }.collect()
+        }
+
+        lifecycleScope.launch {
+            mainViewModel.isOnline.flowWithLifecycle(lifecycle)
+                .collect {
+                    if (!it) {
+                        navigateTo(NoInternetFragment.newInstance())
+                    }
+                }
+        }
+    }
+
+    private fun checkingActivationIsOnBoarding() {
+        if (onBoardingFinished()) {
+            navigateTo(MainFragment.newInstance())
+        } else {
+            navigateTo(ViewPagerFragment.newInstance())
+        }
     }
 }
