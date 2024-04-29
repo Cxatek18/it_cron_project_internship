@@ -28,4 +28,11 @@
         </activity>
     </application>
 
+    <queries>
+        <!-- Explicit apps you know in advance about: -->
+        <package android:name="com.facebook.katana"/>
+        <package android:name="com.instagram.android"/>
+        <package android:name="org.telegram.messenger"/>
+    </queries>
+
 </manifest>

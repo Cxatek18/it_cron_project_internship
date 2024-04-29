@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_main">#131212</color>
     <color name="color_main_second">#FB6542</color>
+    <color name="color_text_click">#818181</color>
 </resources>
