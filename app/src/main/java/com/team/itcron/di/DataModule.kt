@@ -1,7 +1,9 @@
 package com.team.itcron.di
 
 import com.team.itcron.data.network.ApiService
+import com.team.itcron.data.repository.CaseRepositoryImpl
 import com.team.itcron.data.repository.MenuRepositoryImpl
+import com.team.itcron.domain.repository.CaseRepository
 import com.team.itcron.domain.repository.MenuRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,6 +15,10 @@ val dataModule = module {
 
     single<MenuRepository> {
         MenuRepositoryImpl(apiService = get())
+    }
+
+    single<CaseRepository> {
+        CaseRepositoryImpl(apiService = get())
     }
 
     single<ApiService> {
