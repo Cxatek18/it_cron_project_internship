@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListCaseBinding
 import com.team.itcron.presentation.adapter.CaseAdapter
@@ -16,7 +18,6 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class ListCaseFragment : Fragment(), KoinComponent {
 
@@ -27,7 +28,7 @@ class ListCaseFragment : Fragment(), KoinComponent {
         )
 
     private val listCaseViewModel by viewModel<ListCaseViewModel>()
-    private val adapter: CaseAdapter by inject<CaseAdapter>()
+    private lateinit var adapter: CaseAdapter
 
     private val navigateHelper: NavigateHelper by lazy {
         (requireActivity() as? NavigateHelper)
@@ -52,13 +53,15 @@ class ListCaseFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listCaseViewModel.getCaseToList()
+        adapter = CaseAdapter(Glide.with(this))
         binding.listCase.adapter = adapter
         observeViewModel()
         onClickBackBtn()
+        listeningOnBackPressed()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
     // ****** lifecycle *****
@@ -86,6 +89,12 @@ class ListCaseFragment : Fragment(), KoinComponent {
     private fun onClickBackBtn() {
         binding.btnBack.setOnClickListener {
             navigateHelper.exit()
+        }
+    }
+
+    private fun listeningOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback {
+            navigateHelper.navigateTo(MainFragment.newInstance())
         }
     }
 
