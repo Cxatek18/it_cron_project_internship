@@ -70,9 +70,4 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
-    implementation("com.mikepenz:fastadapter:5.7.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.mikepenz:fastadapter-extensions-binding:5.7.0")
-    implementation("com.mikepenz:fastadapter-extensions-diff:5.7.0")
 }
