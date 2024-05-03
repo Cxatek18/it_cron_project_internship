@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListCaseBinding
-import com.team.itcron.domain.models.Case
+import com.team.itcron.presentation.adapter_delegation.CaseDiffCallback
 import com.team.itcron.presentation.adapter_delegation.caseAdapterDelegate
 import com.team.itcron.presentation.navigate.NavigateHelper
 import com.team.itcron.presentation.view_models.ListCaseViewModel
@@ -38,7 +38,13 @@ class ListCaseFragment : Fragment(), KoinComponent {
             )
     }
 
-    private lateinit var adapter: ListDelegationAdapter<List<Case>>
+    private val glide by lazy { Glide.with(this) }
+    private val adapter by lazy {
+        AsyncListDifferDelegationAdapter(
+            CaseDiffCallback(),
+            caseAdapterDelegate(glide),
+        )
+    }
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +62,6 @@ class ListCaseFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listCaseViewModel.getCaseToList()
-        adapter = ListDelegationAdapter(
-            caseAdapterDelegate(Glide.with(this))
-        )
         binding.listCase.adapter = adapter
         observeViewModel()
         onClickBackBtn()
@@ -78,7 +81,6 @@ class ListCaseFragment : Fragment(), KoinComponent {
                 .filterNotNull()
                 .collect { caseToList ->
                     adapter.items = caseToList.data
-                    adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
                 }
         }
