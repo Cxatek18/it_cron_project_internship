@@ -63,6 +63,7 @@ class ListCaseFragment : Fragment(), KoinComponent {
         observeViewModel()
         onClickBackBtn()
         listeningOnBackPressed()
+        onCLickFilters()
     }
 
     override fun onDestroyView() {
@@ -89,6 +90,12 @@ class ListCaseFragment : Fragment(), KoinComponent {
                         navigateHelper.navigateTo(NoInternetFragment.newInstance())
                     }
                 }
+        }
+    }
+
+    private fun onCLickFilters() {
+        binding.textFilterAppbar.setOnClickListener {
+            navigateHelper.navigateTo(ListFilterFragment.newInstance())
         }
     }
 

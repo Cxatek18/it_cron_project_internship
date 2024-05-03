@@ -41,6 +41,9 @@
     <string name="text_is_null_binding_view_list_case_fragment">
         FragmentListCaseBinding is null
     </string>
+    <string name="text_is_null_binding_view_list_filter_fragment">
+        ListFilterFragment is null
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -52,5 +55,6 @@
     <string name="text_send_request">Оставить заявку</string>
     <string name="text_title_appbar">Кейсы</string>
     <string name="text_filter_appbar">Фильтр</string>
+    <string name="text_title_appbar_filter">Фильтры</string>
 
 </resources>

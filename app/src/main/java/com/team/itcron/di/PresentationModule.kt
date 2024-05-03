@@ -5,6 +5,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.team.itcron.presentation.activity.NetworkChecker
 import com.team.itcron.presentation.view_models.ListCaseViewModel
+import com.team.itcron.presentation.view_models.ListFilterViewModel
 import com.team.itcron.presentation.view_models.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,6 +18,10 @@ val presentationModule = module {
 
     viewModel<ListCaseViewModel> {
         ListCaseViewModel(getCaseToListUseCase = get())
+    }
+
+    viewModel<ListFilterViewModel> {
+        ListFilterViewModel(getFilterToCategoryListUseCase = get())
     }
 
     single<Cicerone<Router>> {
