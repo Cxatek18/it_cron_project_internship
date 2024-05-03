@@ -67,4 +67,11 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("io.insert-koin:koin-core:3.5.3")
     implementation("io.insert-koin:koin-test:3.5.3")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // AdapterDelegates
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2")
 }

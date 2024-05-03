@@ -38,6 +38,9 @@
     <string name="text_link_facebook">https://www.facebook.com/it.cron.ru/</string>
     <string name="text_link_instagram">https://www.instagram.com/itcron/?hl=ru</string>
     <string name="text_link_telegram"> https://t.me/+NnhpGqJYWAU2MDIy</string>
+    <string name="text_is_null_binding_view_list_case_fragment">
+        FragmentListCaseBinding is null
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -47,6 +50,7 @@
     <string name="text_contacts">Контакты</string>
     <string name="text_email_company">hello@it-cron.ru</string>
     <string name="text_send_request">Оставить заявку</string>
-
+    <string name="text_title_appbar">Кейсы</string>
+    <string name="text_filter_appbar">Фильтр</string>
 
 </resources>

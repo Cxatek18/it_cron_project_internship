@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentMainBinding
+import com.team.itcron.presentation.navigate.NavigateHelper
 
 class MainFragment : Fragment() {
 
@@ -20,6 +21,13 @@ class MainFragment : Fragment() {
         get() = _binding ?: throw RuntimeException(
             getString(R.string.text_is_null_binding_main_fragment)
         )
+
+    private val navigateHelper: NavigateHelper by lazy {
+        (requireActivity() as? NavigateHelper)
+            ?: throw RuntimeException(
+                getString(R.string.text_error_no_implements_interface)
+            )
+    }
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +138,7 @@ class MainFragment : Fragment() {
             textCase.setOnClickListener {
                 setColorTheWhiteAllPoints()
                 setColorText(textCase, R.color.color_text_click)
+                navigateHelper.navigateTo(ListCaseFragment.newInstance())
             }
             textCompany.setOnClickListener {
                 setColorTheWhiteAllPoints()

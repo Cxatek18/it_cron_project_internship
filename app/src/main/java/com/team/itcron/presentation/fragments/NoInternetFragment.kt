@@ -44,6 +44,7 @@ class NoInternetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         networkChecker = NetworkChecker(requireContext())
         checkConnectToInternet()
+        clickCloseBtn()
     }
 
     override fun onDestroy() {
@@ -57,6 +58,12 @@ class NoInternetFragment : Fragment() {
             if (it) {
                 navigateHelper.navigateTo(MainFragment.newInstance())
             }
+        }
+    }
+
+    private fun clickCloseBtn() {
+        binding.btnClose.setOnClickListener {
+            navigateHelper.navigateTo(MainFragment.newInstance())
         }
     }
 

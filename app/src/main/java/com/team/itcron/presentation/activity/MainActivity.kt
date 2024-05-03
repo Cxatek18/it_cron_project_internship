@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity(), NavigateHelper, KoinComponent {
         router.navigateTo(FragmentScreen { fragment })
     }
 
+    override fun exit() {
+        router.exit()
+    }
+
     private fun checkConnectToInternet() {
         networkChecker.observe(this) {
             if (!it) {
