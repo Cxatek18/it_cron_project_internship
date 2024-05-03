@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListCaseBinding
-import com.team.itcron.presentation.adapter.CaseAdapter
+import com.team.itcron.domain.models.Case
+import com.team.itcron.presentation.adapter_delegation.caseAdapterDelegate
 import com.team.itcron.presentation.navigate.NavigateHelper
 import com.team.itcron.presentation.view_models.ListCaseViewModel
 import kotlinx.coroutines.flow.filterNotNull
@@ -28,7 +30,6 @@ class ListCaseFragment : Fragment(), KoinComponent {
         )
 
     private val listCaseViewModel by viewModel<ListCaseViewModel>()
-    private lateinit var adapter: CaseAdapter
 
     private val navigateHelper: NavigateHelper by lazy {
         (requireActivity() as? NavigateHelper)
@@ -36,6 +37,8 @@ class ListCaseFragment : Fragment(), KoinComponent {
                 getString(R.string.text_error_no_implements_interface)
             )
     }
+
+    private lateinit var adapter: ListDelegationAdapter<List<Case>>
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +56,9 @@ class ListCaseFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listCaseViewModel.getCaseToList()
-        adapter = CaseAdapter(Glide.with(this))
+        adapter = ListDelegationAdapter(
+            caseAdapterDelegate(Glide.with(this))
+        )
         binding.listCase.adapter = adapter
         observeViewModel()
         onClickBackBtn()
@@ -71,7 +76,8 @@ class ListCaseFragment : Fragment(), KoinComponent {
             listCaseViewModel.caseToList.flowWithLifecycle(lifecycle)
                 .filterNotNull()
                 .collect { caseToList ->
-                    adapter.submitList(caseToList.data)
+                    adapter.items = caseToList.data
+                    adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
                 }
         }

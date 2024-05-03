@@ -70,4 +70,8 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // AdapterDelegates
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2")
 }
