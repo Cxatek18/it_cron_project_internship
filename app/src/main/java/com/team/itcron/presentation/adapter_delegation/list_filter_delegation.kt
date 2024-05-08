@@ -1,41 +1,28 @@
 package com.team.itcron.presentation.adapter_delegation
 
-import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.team.itcron.R
-import com.team.itcron.databinding.CasesFilterBinding
+import com.team.itcron.databinding.CategoryFilterItemBinding
 import com.team.itcron.databinding.FilterItemBinding
-import com.team.itcron.domain.models.CategoryFilter
-import com.team.itcron.domain.models.Filter
+import com.team.itcron.domain.models.FilterItem
 
-fun caseFilterAdapterDelegate(
-    setSelectionFilter: (Filter) -> Unit,
-) = adapterDelegateViewBinding<
-        CategoryFilter,
-        CategoryFilter,
-        CasesFilterBinding
+fun caseFilterAdapterDelegate() = adapterDelegateViewBinding<
+        FilterItem.Category,
+        FilterItem,
+        CategoryFilterItemBinding
         >(
-    { layoutInflater, root -> CasesFilterBinding.inflate(layoutInflater, root, false) }
+    { layoutInflater, root -> CategoryFilterItemBinding.inflate(layoutInflater, root, false) }
 ) {
-    val adapter = AsyncListDifferDelegationAdapter(
-        FilterDiffCallback(),
-        filterAdapterDelegate(
-            setSelectionFilter,
-        )
-    )
     bind {
         binding.titleFilters.text = item.name
-        binding.listFilter.adapter = adapter
-        binding.listFilter.itemAnimator = null
-        adapter.items = item.filters
     }
 }
 
 fun filterAdapterDelegate(
-    setSelectionFilter: (Filter) -> Unit,
+    setSelectionFilter: (FilterItem.Filter) -> Unit,
 ) = adapterDelegateViewBinding<
-        Filter,
-        Filter,
+        FilterItem.Filter,
+        FilterItem,
         FilterItemBinding
         >(
     { layoutInflater, root -> FilterItemBinding.inflate(layoutInflater, root, false) }

@@ -1,6 +1,5 @@
 package com.team.itcron.presentation.fragments
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,14 +47,24 @@ class ListCaseFragment : Fragment(), KoinComponent {
         )
     }
 
-    private var filters: List<Filter> = emptyList()
-
-    // ****** lifecycle *****
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        parseArgs()
+    private val filters by lazy {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelableArrayList(
+                EXTRA_ARGS_FILTERS,
+                Filter::class.java
+            ).let {
+                it?.toList() ?: emptyList<Filter>()
+            }
+        } else {
+            arguments?.getParcelableArrayList<Filter>(
+                EXTRA_ARGS_FILTERS
+            ).let {
+                it?.toList() ?: emptyList<Filter>()
+            }
+        }
     }
 
+    // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -144,23 +153,6 @@ class ListCaseFragment : Fragment(), KoinComponent {
     private fun listeningOnBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback {
             navigateHelper.navigateTo(MainFragment.newInstance())
-        }
-    }
-
-    private fun parseArgs() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelableArrayList(
-                EXTRA_ARGS_FILTERS,
-                Filter::class.java
-            )?.let {
-                filters = it.toList()
-            }
-        } else {
-            arguments?.getParcelableArrayList<Filter>(
-                EXTRA_ARGS_FILTERS
-            )?.let {
-                filters = it.toList()
-            }
         }
     }
 

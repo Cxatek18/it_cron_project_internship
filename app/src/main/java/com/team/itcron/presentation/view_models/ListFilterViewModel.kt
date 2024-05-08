@@ -2,8 +2,8 @@ package com.team.itcron.presentation.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team.itcron.domain.models.CategoryFilter
 import com.team.itcron.domain.models.Filter
+import com.team.itcron.domain.models.FilterItem
 import com.team.itcron.domain.usecase.ClearFilterListUseCase
 import com.team.itcron.domain.usecase.FormingListActiveFiltersUseCase
 import com.team.itcron.domain.usecase.GetFilterToCategoryListUseCase
@@ -25,7 +25,7 @@ class ListFilterViewModel(
     val formingListActiveFiltersUseCase: FormingListActiveFiltersUseCase
 ) : ViewModel() {
 
-    private val _filterToCategoryList = MutableStateFlow<List<CategoryFilter>>(emptyList())
+    private val _filterToCategoryList = MutableStateFlow<List<FilterItem>>(emptyList())
     val filterToCategoryList = _filterToCategoryList.asStateFlow()
 
     private val _isOnline = Channel<Boolean>(Channel.CONFLATED)
@@ -34,8 +34,11 @@ class ListFilterViewModel(
     private val _dataLoadIsError = MutableStateFlow<Boolean>(true)
     val dataLoadIsError: StateFlow<Boolean> = _dataLoadIsError.asStateFlow()
 
-    private val _listActiveFilter = MutableStateFlow<List<Filter>>(emptyList())
-    val listActiveFilter = _listActiveFilter.asStateFlow()
+    private val _canClear = MutableStateFlow<Boolean>(false)
+    val canClear: StateFlow<Boolean> = _canClear.asStateFlow()
+
+    private val _listActiveFilter = Channel<List<Filter>>(Channel.CONFLATED)
+    val listActiveFilter = _listActiveFilter.receiveAsFlow()
 
     fun getFilterToCategoryList() {
         viewModelScope.launch {
@@ -48,14 +51,32 @@ class ListFilterViewModel(
                         else -> _dataLoadIsError.value = true
                     }
                 }
-                .collect {
+                .collect { listCategoryFilter ->
                     _dataLoadIsError.value = false
-                    _filterToCategoryList.value = it
+                    val listFilterItem = mutableListOf<FilterItem>()
+                    listCategoryFilter.forEach { categoryFilter ->
+                        listFilterItem.add(
+                            FilterItem.Category(
+                                id = categoryFilter.id,
+                                name = categoryFilter.name
+                            )
+                        )
+                        categoryFilter.filters.forEach { filter ->
+                            listFilterItem.add(
+                                FilterItem.Filter(
+                                    id = filter.id,
+                                    name = filter.name,
+                                    isActive = filter.isActive
+                                )
+                            )
+                        }
+                    }
+                    _filterToCategoryList.value = listFilterItem
                 }
         }
     }
 
-    fun setSelectionFilter(filter: Filter) {
+    fun setSelectionFilter(filter: FilterItem.Filter) {
         viewModelScope.launch {
             setSelectionFilterUseCase.setSelectionFilter(filter)
         }
@@ -71,8 +92,20 @@ class ListFilterViewModel(
         viewModelScope.launch {
             formingListActiveFiltersUseCase.formingListActiveFilters()
                 .collect {
-                    _listActiveFilter.value = it
+                    _listActiveFilter.send(it)
                 }
         }
+    }
+
+    fun determiningPossibilityCleaning() {
+        var countActiveFilters = 0
+        _filterToCategoryList.value.forEach { filterItem ->
+            if (filterItem is FilterItem.Filter) {
+                if (filterItem.isActive) {
+                    countActiveFilters += 1
+                }
+            }
+        }
+        _canClear.value = countActiveFilters > 0
     }
 }

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class FormingListActiveFiltersUseCase(private val repository: FilterRepository) {
 
-    suspend fun formingListActiveFilters(): Flow<List<Filter>> {
+    fun formingListActiveFilters(): Flow<List<Filter>> {
         return repository.formingListActiveFilters()
     }
 }

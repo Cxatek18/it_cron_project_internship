@@ -10,9 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListFilterBinding
-import com.team.itcron.domain.models.CategoryFilter
-import com.team.itcron.presentation.adapter_delegation.CaseFilterDiffCallback
+import com.team.itcron.presentation.adapter_delegation.FilterItemDiffCallback
 import com.team.itcron.presentation.adapter_delegation.caseFilterAdapterDelegate
+import com.team.itcron.presentation.adapter_delegation.filterAdapterDelegate
 import com.team.itcron.presentation.navigate.NavigateHelper
 import com.team.itcron.presentation.view_models.ListFilterViewModel
 import kotlinx.coroutines.launch
@@ -38,8 +38,9 @@ class ListFilterFragment : Fragment(), KoinComponent {
 
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
-            CaseFilterDiffCallback(),
-            caseFilterAdapterDelegate {
+            FilterItemDiffCallback(),
+            caseFilterAdapterDelegate(),
+            filterAdapterDelegate {
                 listFilterViewModel.setSelectionFilter(it)
             }
         )
@@ -79,11 +80,7 @@ class ListFilterFragment : Fragment(), KoinComponent {
             listFilterViewModel.filterToCategoryList.flowWithLifecycle(lifecycle)
                 .collect {
                     adapter.items = it
-                    if (setVisibleBtnClearFilters(it)) {
-                        binding.btnClearFilters.visibility = View.VISIBLE
-                    } else {
-                        binding.btnClearFilters.visibility = View.INVISIBLE
-                    }
+                    listFilterViewModel.determiningPossibilityCleaning()
                 }
         }
 
@@ -95,20 +92,26 @@ class ListFilterFragment : Fragment(), KoinComponent {
                     }
                 }
         }
-    }
 
-    private fun setVisibleBtnClearFilters(listCategoryFilter: List<CategoryFilter>): Boolean {
-        var visible = false
-        for (categoryFilter in listCategoryFilter) {
-            val countActiveFilters = categoryFilter.filters.count {
-                it.isActive
-            }
-            if (countActiveFilters > 0) {
-                visible = true
-                break
-            }
+        lifecycleScope.launch {
+            listFilterViewModel.canClear.flowWithLifecycle(lifecycle)
+                .collect { isClear ->
+                    if (isClear) {
+                        binding.btnClearFilters.visibility = View.VISIBLE
+                    } else {
+                        binding.btnClearFilters.visibility = View.INVISIBLE
+                    }
+                }
         }
-        return visible
+
+        lifecycleScope.launch {
+            listFilterViewModel.listActiveFilter.flowWithLifecycle(lifecycle)
+                .collect { filters ->
+                    navigateHelper.navigateTo(
+                        ListCaseFragment.newInstance(ArrayList(filters))
+                    )
+                }
+        }
     }
 
     private fun clickedListenerClearFilter() {
@@ -120,14 +123,6 @@ class ListFilterFragment : Fragment(), KoinComponent {
     private fun clickedListenerBtnBack() {
         binding.btnBack.setOnClickListener {
             listFilterViewModel.formingListActiveFilters()
-            lifecycleScope.launch {
-                listFilterViewModel.listActiveFilter.flowWithLifecycle(lifecycle)
-                    .collect { filters ->
-                        navigateHelper.navigateTo(
-                            ListCaseFragment.newInstance(ArrayList(filters))
-                        )
-                    }
-            }
         }
     }
 

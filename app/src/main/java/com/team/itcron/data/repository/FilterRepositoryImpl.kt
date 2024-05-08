@@ -3,6 +3,7 @@ package com.team.itcron.data.repository
 import com.team.itcron.data.network.ApiService
 import com.team.itcron.domain.models.CategoryFilter
 import com.team.itcron.domain.models.Filter
+import com.team.itcron.domain.models.FilterItem
 import com.team.itcron.domain.repository.FilterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,7 @@ class FilterRepositoryImpl(val apiService: ApiService) : FilterRepository {
             filtersState.collect { emit(it) }
         }
 
-    override suspend fun setSelectionFilter(filter: Filter) {
+    override suspend fun setSelectionFilter(filter: FilterItem.Filter) {
         filtersState.update { current ->
             val list = current.toMutableList()
             var indexCategoryFilter = 0
@@ -58,7 +59,7 @@ class FilterRepositoryImpl(val apiService: ApiService) : FilterRepository {
         }
     }
 
-    override suspend fun formingListActiveFilters(): Flow<List<Filter>> =
+    override fun formingListActiveFilters(): Flow<List<Filter>> =
         flow<List<Filter>> {
             val listFilterNew = mutableListOf<Filter>()
             filtersState.value.onEach { categoryFilter ->
