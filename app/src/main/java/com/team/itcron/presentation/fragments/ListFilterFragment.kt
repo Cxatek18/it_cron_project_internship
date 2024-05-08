@@ -1,21 +1,20 @@
 package com.team.itcron.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListFilterBinding
+import com.team.itcron.domain.models.CategoryFilter
+import com.team.itcron.presentation.adapter_delegation.CaseFilterDiffCallback
+import com.team.itcron.presentation.adapter_delegation.caseFilterAdapterDelegate
 import com.team.itcron.presentation.navigate.NavigateHelper
-import com.team.itcron.presentation.view_models.ListCaseViewModel
 import com.team.itcron.presentation.view_models.ListFilterViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
@@ -37,6 +36,15 @@ class ListFilterFragment : Fragment(), KoinComponent {
 
     private val listFilterViewModel by viewModel<ListFilterViewModel>()
 
+    private val adapter by lazy {
+        AsyncListDifferDelegationAdapter(
+            CaseFilterDiffCallback(),
+            caseFilterAdapterDelegate {
+                listFilterViewModel.setSelectionFilter(it)
+            }
+        )
+    }
+
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +60,12 @@ class ListFilterFragment : Fragment(), KoinComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.casesFilters.adapter = adapter
+        binding.casesFilters.itemAnimator = null
         listFilterViewModel.getFilterToCategoryList()
         observeViewModel()
+        clickedListenerClearFilter()
+        clickedListenerBtnBack()
     }
 
     override fun onDestroyView() {
@@ -65,9 +77,13 @@ class ListFilterFragment : Fragment(), KoinComponent {
     private fun observeViewModel() {
         lifecycleScope.launch {
             listFilterViewModel.filterToCategoryList.flowWithLifecycle(lifecycle)
-                .filterNotNull()
-                .collect {filterToCategoryList ->
-                    Log.d("ListFilterFragment", filterToCategoryList.data.toString())
+                .collect {
+                    adapter.items = it
+                    if (setVisibleBtnClearFilters(it)) {
+                        binding.btnClearFilters.visibility = View.VISIBLE
+                    } else {
+                        binding.btnClearFilters.visibility = View.INVISIBLE
+                    }
                 }
         }
 
@@ -78,6 +94,40 @@ class ListFilterFragment : Fragment(), KoinComponent {
                         navigateHelper.navigateTo(NoInternetFragment.newInstance())
                     }
                 }
+        }
+    }
+
+    private fun setVisibleBtnClearFilters(listCategoryFilter: List<CategoryFilter>): Boolean {
+        var visible = false
+        for (categoryFilter in listCategoryFilter) {
+            val countActiveFilters = categoryFilter.filters.count {
+                it.isActive
+            }
+            if (countActiveFilters > 0) {
+                visible = true
+                break
+            }
+        }
+        return visible
+    }
+
+    private fun clickedListenerClearFilter() {
+        binding.btnClearFilters.setOnClickListener {
+            listFilterViewModel.clearFilterList()
+        }
+    }
+
+    private fun clickedListenerBtnBack() {
+        binding.btnBack.setOnClickListener {
+            listFilterViewModel.formingListActiveFilters()
+            lifecycleScope.launch {
+                listFilterViewModel.listActiveFilter.flowWithLifecycle(lifecycle)
+                    .collect { filters ->
+                        navigateHelper.navigateTo(
+                            ListCaseFragment.newInstance(ArrayList(filters))
+                        )
+                    }
+            }
         }
     }
 

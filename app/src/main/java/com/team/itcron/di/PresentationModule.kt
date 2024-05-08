@@ -17,11 +17,19 @@ val presentationModule = module {
     }
 
     viewModel<ListCaseViewModel> {
-        ListCaseViewModel(getCaseToListUseCase = get())
+        ListCaseViewModel(
+            getCaseToListUseCase = get(),
+            filteringCasesUseCase = get()
+        )
     }
 
     viewModel<ListFilterViewModel> {
-        ListFilterViewModel(getFilterToCategoryListUseCase = get())
+        ListFilterViewModel(
+            getFilterToCategoryListUseCase = get(),
+            setSelectionFilterUseCase = get(),
+            clearFilterListUseCase = get(),
+            formingListActiveFiltersUseCase = get()
+        )
     }
 
     single<Cicerone<Router>> {
