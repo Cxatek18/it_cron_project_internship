@@ -108,4 +108,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_no_search_result"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_case_image"
+        android:elevation="1dp"
+        android:fontFamily="@font/gothampro"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp"
+        android:text="@string/text_no_search_results_found"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

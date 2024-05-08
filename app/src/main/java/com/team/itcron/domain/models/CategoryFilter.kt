@@ -5,10 +5,11 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Filter(
+data class CategoryFilter(
     @SerializedName("Id")
     val id: String,
     @SerializedName("Name")
     val name: String,
-    var isActive: Boolean = false
+    @SerializedName("Filters")
+    val filters: List<Filter>
 ) : Parcelable
