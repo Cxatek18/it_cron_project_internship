@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -96,11 +97,7 @@ class ListFilterFragment : Fragment(), KoinComponent {
         lifecycleScope.launch {
             listFilterViewModel.canClear.flowWithLifecycle(lifecycle)
                 .collect { isClear ->
-                    if (isClear) {
-                        binding.btnClearFilters.visibility = View.VISIBLE
-                    } else {
-                        binding.btnClearFilters.visibility = View.INVISIBLE
-                    }
+                    binding.btnClearFilters.isInvisible = !isClear
                 }
         }
 

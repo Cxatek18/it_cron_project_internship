@@ -25,18 +25,11 @@ class CaseRepositoryImpl(val apiService: ApiService) : CaseRepository {
     override fun filteringCases(filters: List<Filter>): Flow<List<Case>> =
         flow<List<Case>> {
             if (caseToList.value.isNotEmpty()) {
-                val filteringCaseList = mutableListOf<Case>()
-                filters.forEach { filter ->
-                    caseToList.value.forEach { case ->
-                        case.filters.forEach { filterCase ->
-                            if (filter.id == filterCase.id) {
-                                filteringCaseList.add(case)
-                            }
-                        }
-                    }
+                val filtersIds = filters.mapTo(mutableSetOf<String>()) { it.id }
+                val filteringCaseList = caseToList.value.filter { case ->
+                    case.filters.any { it.id in filtersIds }
                 }
-                filteringCaseList.toList()
-                filteringCaseToList.value = filteringCaseList.toList()
+                filteringCaseToList.value = filteringCaseList
             }
             filteringCaseToList.collect { emit(it) }
         }
