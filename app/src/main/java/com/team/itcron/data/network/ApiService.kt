@@ -1,10 +1,12 @@
 package com.team.itcron.data.network
 
+import com.team.itcron.domain.models.CaseDetail
 import com.team.itcron.domain.models.CaseToList
 import com.team.itcron.domain.models.FilterToCategoryList
 import com.team.itcron.domain.models.Menu
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -22,4 +24,12 @@ interface ApiService {
         "Accept-Language: ru,en;q=0.9"
     )
     suspend fun getFilterToCategoryList(): FilterToCategoryList
+
+    @GET("cases/{id}")
+    @Headers(
+        "Accept-Language: ru,en;q=0.9"
+    )
+    suspend fun getCaseDetail(
+        @Path("id") id: String,
+    ): CaseDetail
 }

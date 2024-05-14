@@ -10,4 +10,8 @@
     <color name="color_background_appbar">#CB131212</color>
     <color name="color_progress_bar">#FB6542</color>
     <color name="color_text_title">#1F1F1F</color>
+    <color name="color_background_technical_block">#69488D</color>
+    <color name="color_background_appbar_case_detail">#E6131212</color>
+    <color name="color_background_btn_download">#A6A6A6</color>
+    <color name="color_background_progress_bar">#66000000</color>
 </resources>

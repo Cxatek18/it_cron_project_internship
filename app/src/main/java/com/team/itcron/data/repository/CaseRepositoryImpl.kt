@@ -14,6 +14,8 @@ class CaseRepositoryImpl(val apiService: ApiService) : CaseRepository {
 
     private val filteringCaseToList = MutableStateFlow<List<Case>>(emptyList())
 
+    private val listActiveFilter = MutableStateFlow<List<Filter>>(emptyList())
+
     override fun getCaseToList(): Flow<List<Case>> =
         flow<List<Case>> {
             if (caseToList.value.isEmpty()) {
@@ -33,4 +35,13 @@ class CaseRepositoryImpl(val apiService: ApiService) : CaseRepository {
             }
             filteringCaseToList.collect { emit(it) }
         }
+
+    override fun getActiveFilter(): Flow<List<Filter>> =
+        flow<List<Filter>> {
+            listActiveFilter.collect { emit(it) }
+        }
+
+    override suspend fun addFiltersToListActiveFilter(filters: List<Filter>) {
+        listActiveFilter.value = filters
+    }
 }

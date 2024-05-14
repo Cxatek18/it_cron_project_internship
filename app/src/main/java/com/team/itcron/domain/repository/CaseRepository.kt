@@ -8,4 +8,8 @@ interface CaseRepository {
     fun getCaseToList(): Flow<List<Case>>
 
     fun filteringCases(filters: List<Filter>): Flow<List<Case>>
+
+    fun getActiveFilter(): Flow<List<Filter>>
+
+    suspend fun addFiltersToListActiveFilter(filters: List<Filter>)
 }

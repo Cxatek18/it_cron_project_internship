@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
@@ -68,6 +69,7 @@ class ListFilterFragment : Fragment(), KoinComponent {
         observeViewModel()
         clickedListenerClearFilter()
         clickedListenerBtnBack()
+        listeningOnBackPressed()
     }
 
     override fun onDestroyView() {
@@ -119,6 +121,12 @@ class ListFilterFragment : Fragment(), KoinComponent {
 
     private fun clickedListenerBtnBack() {
         binding.btnBack.setOnClickListener {
+            listFilterViewModel.formingListActiveFilters()
+        }
+    }
+
+    private fun listeningOnBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback {
             listFilterViewModel.formingListActiveFilters()
         }
     }

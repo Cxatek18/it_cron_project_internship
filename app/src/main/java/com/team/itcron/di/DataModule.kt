@@ -1,9 +1,11 @@
 package com.team.itcron.di
 
 import com.team.itcron.data.network.ApiService
+import com.team.itcron.data.repository.CaseDetailRepositoryImpl
 import com.team.itcron.data.repository.CaseRepositoryImpl
 import com.team.itcron.data.repository.FilterRepositoryImpl
 import com.team.itcron.data.repository.MenuRepositoryImpl
+import com.team.itcron.domain.repository.CaseDetailRepository
 import com.team.itcron.domain.repository.CaseRepository
 import com.team.itcron.domain.repository.FilterRepository
 import com.team.itcron.domain.repository.MenuRepository
@@ -25,6 +27,10 @@ val dataModule = module {
 
     single<FilterRepository> {
         FilterRepositoryImpl(apiService = get())
+    }
+
+    single<CaseDetailRepository> {
+        CaseDetailRepositoryImpl(apiService = get())
     }
 
     single<ApiService> {
