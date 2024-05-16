@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team.itcron.domain.models.Case
 import com.team.itcron.domain.models.Filter
+import com.team.itcron.domain.usecase.AddFiltersToListActiveFilterUseCase
 import com.team.itcron.domain.usecase.FilteringCasesUseCase
+import com.team.itcron.domain.usecase.GetActiveFilterUseCase
 import com.team.itcron.domain.usecase.GetCaseToListUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +20,9 @@ import java.net.UnknownHostException
 
 class ListCaseViewModel(
     val getCaseToListUseCase: GetCaseToListUseCase,
-    val filteringCasesUseCase: FilteringCasesUseCase
+    val filteringCasesUseCase: FilteringCasesUseCase,
+    val getActiveFilterUseCase: GetActiveFilterUseCase,
+    val addFiltersToListActiveFilterUseCase: AddFiltersToListActiveFilterUseCase
 ) : ViewModel() {
 
     private val _caseToList = MutableStateFlow<List<Case>>(emptyList())
@@ -32,6 +36,9 @@ class ListCaseViewModel(
 
     private val _filteringCaseToList = MutableStateFlow<List<Case>>(emptyList())
     val filteringCaseToList: StateFlow<List<Case>> = _filteringCaseToList.asStateFlow()
+
+    private val _listActiveFilter = MutableStateFlow<List<Filter>>(emptyList())
+    val listActiveFilter: StateFlow<List<Filter>> = _listActiveFilter.asStateFlow()
 
     fun getCaseToList() {
         viewModelScope.launch {
@@ -51,12 +58,28 @@ class ListCaseViewModel(
         }
     }
 
-    fun filteringCasesUseCase(filters: List<Filter>) {
+    fun filteringCases(filters: List<Filter>) {
         viewModelScope.launch {
             filteringCasesUseCase.filteringCases(filters)
                 .collect { listCase ->
                     _filteringCaseToList.value = listCase
                 }
+        }
+    }
+
+    fun getActiveFilter() {
+        viewModelScope.launch {
+            getActiveFilterUseCase.getActiveFilter()
+                .collect { listActiveFilter ->
+                    _listActiveFilter.value = listActiveFilter
+                }
+        }
+    }
+
+    fun addFiltersToListActiveFilter(filters: List<Filter>) {
+        viewModelScope.launch {
+            addFiltersToListActiveFilterUseCase.addFiltersToListActiveFilter(filters)
+            _listActiveFilter.value = filters
         }
     }
 }

@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.team.itcron.presentation.activity.NetworkChecker
+import com.team.itcron.presentation.view_models.CaseDetailViewModel
 import com.team.itcron.presentation.view_models.ListCaseViewModel
 import com.team.itcron.presentation.view_models.ListFilterViewModel
 import com.team.itcron.presentation.view_models.MainViewModel
@@ -19,7 +20,9 @@ val presentationModule = module {
     viewModel<ListCaseViewModel> {
         ListCaseViewModel(
             getCaseToListUseCase = get(),
-            filteringCasesUseCase = get()
+            filteringCasesUseCase = get(),
+            getActiveFilterUseCase = get(),
+            addFiltersToListActiveFilterUseCase = get()
         )
     }
 
@@ -29,6 +32,12 @@ val presentationModule = module {
             setSelectionFilterUseCase = get(),
             clearFilterListUseCase = get(),
             formingListActiveFiltersUseCase = get()
+        )
+    }
+
+    viewModel<CaseDetailViewModel> {
+        CaseDetailViewModel(
+            getCaseDetailUseCase = get()
         )
     }
 

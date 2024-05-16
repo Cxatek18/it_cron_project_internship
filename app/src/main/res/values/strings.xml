@@ -50,6 +50,15 @@
     <string name="extra_saved_filters">
         filters_saved
     </string>
+    <string name="text_is_null_binding_view_detail_case_fragment">
+        FragmentCaseDetailBinding is null
+    </string>
+    <string name="text_is_null_binding_view_screenshot_list_fragment">
+        FragmentScreenshotListBinding is null
+    </string>
+    <string name="default_color">
+        69488D
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -63,5 +72,19 @@
     <string name="text_filter_appbar">Фильтр</string>
     <string name="text_title_appbar_filter">Фильтры</string>
     <string name="text_no_search_results_found">По вашему запросу ничего\nне найдено.</string>
+    <string name="text_title_appbar_detail_case">Кейс</string>
+    <string name="text_task">Задача</string>
+    <string name="text_opportunities">Приложение позволяет</string>
+    <string name="text_technological">Технология</string>
+    <string name="text_platform">Платформа</string>
+    <string name="text_get_it_on">Get it on</string>
+    <string name="text_google_play">Google Play</string>
+    <string name="text_download_on_the">Download on the</string>
+    <string name="text_app_store">App Store</string>
+    <string name="text_view_website">Посмотреть сайт</string>
+    <string name="text_become_customer">Стать клиентом или\nпартнером!</string>
+    <string name="text_next_case">Следующий кейс</string>
+    <string name="text_go_back_to_main_page">Вернуться на Главную</string>
+    <string name="text_screenshot">Splash</string>
 
 </resources>

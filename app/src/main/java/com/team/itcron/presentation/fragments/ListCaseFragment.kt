@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.team.itcron.R
 import com.team.itcron.databinding.FragmentListCaseBinding
+import com.team.itcron.domain.models.Case
 import com.team.itcron.domain.models.Filter
 import com.team.itcron.presentation.adapter_delegation.CaseDiffCallback
 import com.team.itcron.presentation.adapter_delegation.caseAdapterDelegate
@@ -40,28 +41,16 @@ class ListCaseFragment : Fragment(), KoinComponent {
     }
 
     private val glide by lazy { Glide.with(this) }
+
+    private lateinit var cases: ArrayList<Case>
+
     private val adapter by lazy {
         AsyncListDifferDelegationAdapter(
             CaseDiffCallback(),
-            caseAdapterDelegate(glide),
+            caseAdapterDelegate(glide) { caseId, caseImage ->
+                onClickCase(caseId, caseImage)
+            }
         )
-    }
-
-    private val filters by lazy {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelableArrayList(
-                EXTRA_ARGS_FILTERS,
-                Filter::class.java
-            ).let {
-                it?.toList() ?: emptyList<Filter>()
-            }
-        } else {
-            arguments?.getParcelableArrayList<Filter>(
-                EXTRA_ARGS_FILTERS
-            ).let {
-                it?.toList() ?: emptyList<Filter>()
-            }
-        }
     }
 
     // ****** lifecycle *****
@@ -80,15 +69,13 @@ class ListCaseFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.listCase.adapter = adapter
+        parseArgs()
+        listCaseViewModel.getActiveFilter()
+        listCaseViewModel.getCaseToList()
         observeViewModel()
         onClickBackBtn()
         listeningOnBackPressed()
         onCLickFilters()
-        setColorTextFilter()
-        listCaseViewModel.getCaseToList()
-        if (filters.isNotEmpty()) {
-            listCaseViewModel.filteringCasesUseCase(filters)
-        }
     }
 
     override fun onDestroyView() {
@@ -99,25 +86,32 @@ class ListCaseFragment : Fragment(), KoinComponent {
 
     private fun observeViewModel() {
         lifecycleScope.launch {
-            if (filters.isEmpty()) {
-                listCaseViewModel.caseToList.flowWithLifecycle(lifecycle)
-                    .collect { caseToList ->
-                        if (caseToList.isNotEmpty()) {
-                            adapter.items = caseToList
-                            binding.progressBar.visibility = View.GONE
-                        }
+            listCaseViewModel.listActiveFilter.flowWithLifecycle(lifecycle)
+                .collect { listActiveFilter ->
+                    if (listActiveFilter.isNotEmpty()) {
+                        listCaseViewModel.filteringCases(listActiveFilter)
+                        setColorTextFilter(listActiveFilter)
+                        listCaseViewModel.filteringCaseToList.flowWithLifecycle(lifecycle)
+                            .collect { caseToList ->
+                                if (caseToList.isEmpty() && listActiveFilter.isNotEmpty()) {
+                                    binding.listCase.visibility = View.GONE
+                                    binding.textNoSearchResult.visibility = View.VISIBLE
+                                }
+                                adapter.items = caseToList
+                                binding.progressBar.visibility = View.GONE
+                                cases = ArrayList(caseToList)
+                            }
+                    } else {
+                        listCaseViewModel.caseToList.flowWithLifecycle(lifecycle)
+                            .collect { caseToList ->
+                                if (caseToList.isNotEmpty()) {
+                                    adapter.items = caseToList
+                                    binding.progressBar.visibility = View.GONE
+                                    cases = ArrayList(caseToList)
+                                }
+                            }
                     }
-            } else {
-                listCaseViewModel.filteringCaseToList.flowWithLifecycle(lifecycle)
-                    .collect { caseToList ->
-                        if (caseToList.isEmpty() && filters.isNotEmpty()) {
-                            binding.listCase.visibility = View.GONE
-                            binding.textNoSearchResult.visibility = View.VISIBLE
-                        }
-                        adapter.items = caseToList
-                        binding.progressBar.visibility = View.GONE
-                    }
-            }
+                }
         }
 
         lifecycleScope.launch {
@@ -130,7 +124,7 @@ class ListCaseFragment : Fragment(), KoinComponent {
         }
     }
 
-    private fun setColorTextFilter() {
+    private fun setColorTextFilter(filters: List<Filter>) {
         if (filters.isNotEmpty()) {
             binding.textFilterAppbar.setTextColor(
                 requireContext().getColor(R.color.color_main_second)
@@ -150,9 +144,42 @@ class ListCaseFragment : Fragment(), KoinComponent {
         }
     }
 
+    private fun onClickCase(caseId: String, caseImage: String) {
+        navigateHelper.navigateTo(
+            CaseDetailFragment.newInstance(
+                caseId,
+                caseImage,
+                cases
+            )
+        )
+    }
+
     private fun listeningOnBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback {
             navigateHelper.navigateTo(MainFragment.newInstance())
+        }
+    }
+
+    private fun parseArgs() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelableArrayList(
+                EXTRA_ARGS_FILTERS,
+                Filter::class.java
+            ).let {
+                if (it != null) {
+                    val listActiveFilter = it.toList()
+                    listCaseViewModel.addFiltersToListActiveFilter(listActiveFilter)
+                }
+            }
+        } else {
+            arguments?.getParcelableArrayList<Filter>(
+                EXTRA_ARGS_FILTERS
+            ).let {
+                if (it != null) {
+                    val listActiveFilter = it.toList()
+                    listCaseViewModel.addFiltersToListActiveFilter(listActiveFilter)
+                }
+            }
         }
     }
 

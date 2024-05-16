@@ -1,8 +1,11 @@
 package com.team.itcron.di
 
+import com.team.itcron.domain.usecase.AddFiltersToListActiveFilterUseCase
 import com.team.itcron.domain.usecase.ClearFilterListUseCase
 import com.team.itcron.domain.usecase.FilteringCasesUseCase
 import com.team.itcron.domain.usecase.FormingListActiveFiltersUseCase
+import com.team.itcron.domain.usecase.GetActiveFilterUseCase
+import com.team.itcron.domain.usecase.GetCaseDetailUseCase
 import com.team.itcron.domain.usecase.GetCaseToListUseCase
 import com.team.itcron.domain.usecase.GetFilterToCategoryListUseCase
 import com.team.itcron.domain.usecase.GetMenuUseCase
@@ -37,5 +40,17 @@ val domainModule = module {
 
     factory<FormingListActiveFiltersUseCase> {
         FormingListActiveFiltersUseCase(repository = get())
+    }
+
+    factory<GetActiveFilterUseCase> {
+        GetActiveFilterUseCase(repository = get())
+    }
+
+    factory<AddFiltersToListActiveFilterUseCase> {
+        AddFiltersToListActiveFilterUseCase(repository = get())
+    }
+
+    factory<GetCaseDetailUseCase> {
+        GetCaseDetailUseCase(repository = get())
     }
 }
