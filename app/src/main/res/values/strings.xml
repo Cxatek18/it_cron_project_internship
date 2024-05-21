@@ -59,6 +59,9 @@
     <string name="default_color">
         69488D
     </string>
+    <string name="text_is_null_binding_view_company_fragment">
+        FragmentCompanyBinding is null
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -86,5 +89,46 @@
     <string name="text_next_case">Следующий кейс</string>
     <string name="text_go_back_to_main_page">Вернуться на Главную</string>
     <string name="text_screenshot">Splash</string>
+    <string name="slogan_company">cron as expected</string>
+    <string name="text_our_slogan">вот наш слоган</string>
+    <string name="title_design_and_product">Проектно-\nпродуктовый</string>
+    <string name="text_development_approach">подход к разработке\nпрограммного обеспечения</string>
+    <string name="text_project">Проектный</string>
+    <string name="text_description_project">
+        Позволяет нам качественно\nорганизовать деятельность для\nвзаимодействия наших\nсотрудников и Заказчика
+    </string>
+    <string name="text_product">Продуктовый</string>
+    <string name="text_description_product">
+        Оказывать услуги и выдавать тот\nрезультат, который необходим\nЗаказчику и рынку
+    </string>
+    <string name="text_name_director">Пухов Александр Сергеевич</string>
+    <string name="text_post_director">Учредитель и руководитель\nООО «АЙТИ КРОН»</string>
+    <string name="text_about_origin_the_company">
+        Несколько слов\nо зарождении и названии\nкомпании
+    </string>
+    <string name="text_description_the_company_first">
+        У меня уже был опыт управления\nдругой компанией.\nВ этой компании было несколько\nпартнеров и несмотря на то,\nчто общее движение было\nсогласованным, некоторые\nреализации я видел по-другому.\nПоэтому в конце 2018 года\nя решил, что хочу реализовать свои\nидеи на все 100%.\nВ какой-то мере это был некий\nчелендж. Сейчас все идет по плану :)
+    </string>
+    <string name="text_description_the_company_second">
+        По поводу названия. IT – очевидно,\nпотому что мы работаем в IT,\nа CRON – связано с Linux\nпланировщиком и это отсылка\nк тому, что мы работаем, как часы.\nМы предоставляем услуги точно\nв срок и с отличным качеством.\nНаш слоган – cron as expected ;)
+    </string>
+    <string name="text_information_about_cooperation">
+        Мы сотрудничаем с клиентами,\nмыслящими на перспективу,\nчтобы трансформировать идеи\nв реальные продукты.
+    </string>
+    <string name="text_reviews_client">Отзывы клиентов</string>
+    <string name="text_watch_all">Смотреть все</string>
+    <string name="text_look_breathing">Взгляните чем мы дышим</string>
+    <string name="title_link_facebook">Facebook</string>
+    <string name="title_link_instagram">Instagram</string>
+    <string name="title_link_telegram">Telegram</string>
+    <string name="text_join_team">Присоединяйтесь к команде</string>
+    <string name="text_send_portfolio">
+        Таланты всегда приветствуются.\nОтправляй свое портфолио\nпо адресу
+    </string>
+    <string name="text_email_company_hr">hr@it-cron.ru</string>
+    <string name="text_company_city">Россия, Москва</string>
+    <string name="text_company_location">119330, ул. Мосфильмовская, 35</string>
+    <string name="text_company_phone">+7 (495) 006-13-57</string>
+    <string name="text_contact_via">Связаться через</string>
 
 </resources>

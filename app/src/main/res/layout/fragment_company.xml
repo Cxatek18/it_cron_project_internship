@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main"
+    android:backgroundTint="@color/color_main"
+    tools:context=".presentation.fragments.CompanyFragment">
+
+    <LinearLayout
+        android:id="@+id/appbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background_appbar_case_detail"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:paddingStart="22dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow_back" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/company_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/company_logo" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/instagram_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/instagram" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/facebook_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/facebook" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/telegram_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/telegram" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/medium_cube_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="112dp"
+                android:layout_marginEnd="60dp"
+                android:src="@drawable/cube_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/slogan_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.07"
+                android:text="@string/slogan_company"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medium_cube_first" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_our_slogan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.07"
+                android:text="@string/text_our_slogan"
+                android:textColor="@color/color_main_second"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slogan_company" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/small_cube_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="33dp"
+                android:src="@drawable/cube_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_our_slogan" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_design_and_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="33dp"
+                android:fontFamily="@font/gothampro_bold"
+                android:letterSpacing="0.05"
+                android:lineHeight="38dp"
+                android:text="@string/title_design_and_product"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="31sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/small_cube_first" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_development_approach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.07"
+                android:lineHeight="19dp"
+                android:text="@string/text_development_approach"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_design_and_product" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_project"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_development_approach" />
+
+            <View
+                android:id="@+id/line_first"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/color_line_company_fragment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_project" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="19dp"
+                android:text="@string/text_description_project"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_first" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_product"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description_project" />
+
+            <View
+                android:id="@+id/line_second"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/color_line_company_fragment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_product" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="19dp"
+                android:text="@string/text_description_product"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_second" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/big_cube_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="32dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/cube_big"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description_product" />
+
+            <LinearLayout
+                android:id="@+id/information_about_director"
+                android:layout_width="match_parent"
+                android:layout_height="766dp"
+                android:layout_marginTop="64dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/big_cube_first">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/semicircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/semicircle_about_director" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/big_photo_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-55dp"
+                    android:src="@drawable/big_photo_director" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_name_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:letterSpacing="0.05"
+                    android:text="@string/text_name_director"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_main" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_post_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/gothampro"
+                    android:letterSpacing="0.05"
+                    android:lineHeight="19dp"
+                    android:text="@string/text_post_director"
+                    android:textAlignment="center"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_about_origin_the_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:letterSpacing="0.05"
+                    android:lineHeight="19dp"
+                    android:text="@string/text_about_origin_the_company"
+                    android:textColor="@color/color_main_second"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_description_the_company_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:letterSpacing="0.05"
+                    android:lineHeight="18dp"
+                    android:text="@string/text_description_the_company_first"
+                    android:textColor="@color/color_main"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_description_the_company_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:letterSpacing="0.05"
+                    android:lineHeight="18dp"
+                    android:text="@string/text_description_the_company_second"
+                    android:textColor="@color/color_main"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_information_about_cooperation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="20dp"
+                android:text="@string/text_information_about_cooperation"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/information_about_director" />
+
+            <LinearLayout
+                android:id="@+id/company_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_information_about_cooperation">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_gazprom" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_lukoil" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_first"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_first" />
+
+            <LinearLayout
+                android:id="@+id/company_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_first">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="48dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_t_" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_megafon" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_second"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_second" />
+
+            <LinearLayout
+                android:id="@+id/company_third"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_second">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="73dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_rosbank" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_abp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_third"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="22dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_third" />
+
+            <LinearLayout
+                android:id="@+id/company_fourth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_third">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="37dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_doc_help" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_ksh" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_fourth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_fourth" />
+
+            <LinearLayout
+                android:id="@+id/company_fifth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_fourth">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="37dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_bank_primarye" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_on_pay" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_fifth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_fifth" />
+
+            <LinearLayout
+                android:id="@+id/company_sixth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_fifth">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="33dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_libertex" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_atb" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_company_sixth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/color_line_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_sixth" />
+
+            <LinearLayout
+                android:id="@+id/company_seventh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_company_sixth">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="33dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_skb_bank" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/logo_lykke" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_seventh">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:letterSpacing="0.05"
+                    android:text="@string/text_reviews_client"
+                    android:textColor="@color/color_main"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:id="@+id/block_watch_later"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/gothampro"
+                        android:letterSpacing="0.05"
+                        android:text="@string/text_watch_all"
+                        android:textColor="@color/color_main_second"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/arrow_reviews_all" />
+
+                </LinearLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/review_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:id="@+id/points_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/review_list"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/medium_cube_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/cube_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_reviews" />
+
+            <LinearLayout
+                android:id="@+id/block_look_breathing_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/medium_cube_second">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:letterSpacing="0.05"
+                    android:text="@string/text_look_breathing"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/small_cube_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="17dp"
+                android:src="@drawable/cube_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_look_breathing_text" />
+
+            <LinearLayout
+                android:id="@+id/block_link_instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="-15dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/small_cube_second">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/link_instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:text="@string/title_link_instagram"
+                    android:textColor="@color/color_main_second"
+                    android:textSize="24sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_main_second" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_link_facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_link_instagram">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/link_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:text="@string/title_link_facebook"
+                    android:textColor="@color/color_main_second"
+                    android:textSize="24sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_main_second" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_link_telegram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_link_facebook">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/link_telegram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:text="@string/title_link_telegram"
+                    android:textColor="@color/color_main_second"
+                    android:textSize="24sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_main_second" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/big_cube_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:paddingBottom="20dp"
+                android:src="@drawable/cube_big"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_link_telegram" />
+
+            <LinearLayout
+                android:id="@+id/block_join_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/big_cube_second">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="56dp"
+                    android:fontFamily="@font/gothampro_medium"
+                    android:letterSpacing="0.05"
+                    android:lineHeight="33dp"
+                    android:text="@string/text_join_team"
+                    android:textColor="@color/color_main_second"
+                    android:textSize="28sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_send_portfolio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/gothampro"
+                    android:letterSpacing="0.03"
+                    android:lineHeight="19dp"
+                    android:paddingBottom="20dp"
+                    android:text="@string/text_send_portfolio"
+                    android:textColor="@color/color_main"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ellipse_fourth_in_case" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_become_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:lineHeight="24dp"
+                android:text="@string/text_become_customer"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_join_team" />
+
+            <View
+                android:id="@+id/vertical_stick"
+                android:layout_width="2dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_become_customer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:letterSpacing="0.07"
+                android:text="@string/text_email_company"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vertical_stick" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_submit_application"
+                android:layout_width="204dp"
+                android:layout_height="204dp"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/background_btn_send_request_case_detail"
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.07"
+                android:lineHeight="29dp"
+                android:text="@string/text_send_request"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email_company" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/company_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.05"
+                android:text="@string/text_company_city"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_submit_application" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/company_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="24dp"
+                android:text="@string/text_company_location"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_city" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_phone_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:text="@string/text_company_phone"
+                android:textAlignment="center"
+                android:textColor="@color/color_main_second"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_location" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_contact_via"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_contact_via"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_phone_company" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/telegram_link_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="64dp"
+                android:src="@drawable/telegram_big"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_contact_via" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

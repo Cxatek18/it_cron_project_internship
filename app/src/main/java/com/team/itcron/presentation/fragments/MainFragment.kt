@@ -143,6 +143,7 @@ class MainFragment : Fragment() {
             textCompany.setOnClickListener {
                 setColorTheWhiteAllPoints()
                 setColorText(textCompany, R.color.color_text_click)
+                navigateHelper.navigateTo(CompanyFragment.newInstance())
             }
             textServices.setOnClickListener {
                 setColorTheWhiteAllPoints()
