@@ -69,7 +69,7 @@ class CompanyFragment : Fragment(), KoinComponent {
         setMargins((6 * dpToPx).toInt(), 0, (6 * dpToPx).toInt(), 0)
     }
 
-    private var isDotsLoad: Boolean = false
+    private var onPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +93,13 @@ class CompanyFragment : Fragment(), KoinComponent {
         observeViewModel()
     }
 
+    override fun onStop() {
+        super.onStop()
+        onPageChangeCallback?.let {
+            binding.reviewList.unregisterOnPageChangeCallback(it)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -108,21 +115,9 @@ class CompanyFragment : Fragment(), KoinComponent {
                     val newList = createFakeReviewList(reviewInfo.data)
                     adapterReview.items = newList.toList()
                     binding.reviewList.currentItem = 1
-                    if (!isDotsLoad) {
-                        val dots = Array(reviewInfo.data.size) {
-                            val imageView = ImageView(requireContext())
-                            imageView.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    requireContext(),
-                                    R.drawable.state_image_dot
-                                )
-                            )
-                            imageView
-                        }
-                        setNoActiveAllDots(dots)
-                        setFirstActiveDot(dots)
-                        listeningChangeViewPager(dots)
-                        isDotsLoad = true
+                    createDots(reviewInfo.data.size)
+                    onPageChangeCallback?.let {
+                        binding.reviewList.registerOnPageChangeCallback(it)
                     }
                 }
         }
@@ -153,6 +148,23 @@ class CompanyFragment : Fragment(), KoinComponent {
                     }
                 }
         }
+    }
+
+    private fun createDots(countDots: Int) {
+        binding.pointsViewPager.removeAllViews()
+        val dots = Array(countDots) {
+            val imageView = ImageView(requireContext())
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.state_image_dot
+                )
+            )
+            imageView
+        }
+        setNoActiveAllDots(dots)
+        setFirstActiveDot(dots)
+        listeningChangeViewPager(dots)
     }
 
     private fun changeTextSendPortfolioEmail() {
@@ -187,7 +199,7 @@ class CompanyFragment : Fragment(), KoinComponent {
     }
 
     private fun listeningChangeViewPager(dots: Array<ImageView>) {
-        binding.reviewList.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 dots.mapIndexed { index, imageView ->
                     imageView.isSelected = position - 1 == index
@@ -203,7 +215,7 @@ class CompanyFragment : Fragment(), KoinComponent {
                 }
                 super.onPageSelected(position)
             }
-        })
+        }
     }
 
     private fun createFakeReviewList(reviews: List<Review>): List<Review> {
