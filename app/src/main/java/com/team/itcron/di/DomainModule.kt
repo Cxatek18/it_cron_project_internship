@@ -8,6 +8,7 @@ import com.team.itcron.domain.usecase.GetActiveFilterUseCase
 import com.team.itcron.domain.usecase.GetCaseDetailUseCase
 import com.team.itcron.domain.usecase.GetCaseToListUseCase
 import com.team.itcron.domain.usecase.GetFilterToCategoryListUseCase
+import com.team.itcron.domain.usecase.GetListReviewUseCase
 import com.team.itcron.domain.usecase.GetMenuUseCase
 import com.team.itcron.domain.usecase.SetSelectionFilterUseCase
 import org.koin.dsl.module
@@ -52,5 +53,9 @@ val domainModule = module {
 
     factory<GetCaseDetailUseCase> {
         GetCaseDetailUseCase(repository = get())
+    }
+
+    factory<GetListReviewUseCase> {
+        GetListReviewUseCase(repository = get())
     }
 }

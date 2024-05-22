@@ -14,4 +14,7 @@
     <color name="color_background_appbar_case_detail">#E6131212</color>
     <color name="color_background_btn_download">#A6A6A6</color>
     <color name="color_background_progress_bar">#66000000</color>
+    <color name="color_line_company_fragment">#4F4F4F</color>
+    <color name="color_line_company">#333333</color>
+    <color name="color_no_active_dot">#E0E0E0</color>
 </resources>
