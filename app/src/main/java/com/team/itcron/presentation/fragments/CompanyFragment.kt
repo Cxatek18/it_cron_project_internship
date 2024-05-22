@@ -2,9 +2,9 @@ package com.team.itcron.presentation.fragments
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -64,8 +65,11 @@ class CompanyFragment : Fragment(), KoinComponent {
         ViewGroup.LayoutParams.WRAP_CONTENT,
         ViewGroup.LayoutParams.WRAP_CONTENT,
     ).apply {
-        setMargins(8, 0, 8, 0)
+        val dpToPx = Resources.getSystem().displayMetrics.density
+        setMargins((6 * dpToPx).toInt(), 0, (6 * dpToPx).toInt(), 0)
     }
+
+    private var isDotsLoad: Boolean = false
 
     // ****** lifecycle *****
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,12 +108,22 @@ class CompanyFragment : Fragment(), KoinComponent {
                     val newList = createFakeReviewList(reviewInfo.data)
                     adapterReview.items = newList.toList()
                     binding.reviewList.currentItem = 1
-                    val dots = Array(reviewInfo.data.size) {
-                        ImageView(requireContext())
+                    if (!isDotsLoad) {
+                        val dots = Array(reviewInfo.data.size) {
+                            val imageView = ImageView(requireContext())
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    requireContext(),
+                                    R.drawable.state_image_dot
+                                )
+                            )
+                            imageView
+                        }
+                        setNoActiveAllDots(dots)
+                        setFirstActiveDot(dots)
+                        listeningChangeViewPager(dots)
+                        isDotsLoad = true
                     }
-                    setNoActiveAllDots(dots)
-                    setFirstActiveDot(dots)
-                    listeningChangeViewPager(dots)
                 }
         }
 
@@ -144,8 +158,6 @@ class CompanyFragment : Fragment(), KoinComponent {
     private fun changeTextSendPortfolioEmail() {
         val textView = binding.textSendPortfolio
         textView.movementMethod = LinkMovementMethod.getInstance()
-        val spannable = SpannableStringBuilder()
-        spannable.append(getString(R.string.text_send_portfolio))
         val link = getString(R.string.text_email_company_hr)
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(view: View) {
@@ -166,13 +178,11 @@ class CompanyFragment : Fragment(), KoinComponent {
                 ds.color = ContextCompat.getColor(requireActivity(), R.color.color_main_second)
             }
         }
-        spannable.append(" ${link}")
-        spannable.setSpan(
-            clickableSpan,
-            spannable.length - link.length,
-            spannable.length,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        val spannable = buildSpannedString {
+            append(getString(R.string.text_send_portfolio))
+            append(" ")
+            append(link, clickableSpan, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
         textView.text = spannable
     }
 
@@ -180,15 +190,7 @@ class CompanyFragment : Fragment(), KoinComponent {
         binding.reviewList.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 dots.mapIndexed { index, imageView ->
-                    if (position - 1 == index) {
-                        imageView.setImageResource(
-                            R.drawable.active_dot
-                        )
-                    } else {
-                        imageView.setImageResource(
-                            R.drawable.no_active_dot
-                        )
-                    }
+                    imageView.isSelected = position - 1 == index
                 }
                 if (position == 0) {
                     binding.reviewList.setCurrentItem(
@@ -213,16 +215,12 @@ class CompanyFragment : Fragment(), KoinComponent {
     }
 
     private fun setFirstActiveDot(dots: Array<ImageView>) {
-        dots[0].setImageResource(
-            R.drawable.active_dot
-        )
+        dots[0].isSelected = true
     }
 
     private fun setNoActiveAllDots(dots: Array<ImageView>) {
         dots.forEach {
-            it.setImageResource(
-                R.drawable.no_active_dot
-            )
+            it.isSelected = false
             binding.pointsViewPager.addView(it, params)
         }
     }

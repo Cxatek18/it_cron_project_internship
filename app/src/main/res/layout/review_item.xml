@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="240dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_review"
@@ -30,56 +30,58 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="«У меня уже был опыт управления другой компанией. В этой компании было несколько партнеров и несмотря на то, что общее движение было согласованным, некоторые реализации я видел по-другому. Поэтому в конце 2018 года я решил, что хочу реализовать свои идеи на все 100%. В какой-то мере это был некий челендж. Сейчас все идет по плану :)»" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_user_review"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/background_photo_user_review"
+            android:backgroundTint="@color/white"
+            android:clipToOutline="true"
+            android:outlineProvider="background"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_review"
+            tools:src="@drawable/medium_image_director" />
+
+        <LinearLayout
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/image_user_review"
             app:layout_constraintTop_toBottomOf="@+id/text_review">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_user_review"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/background_photo_user_review"
-                android:clipToOutline="true"
-                android:outlineProvider="background"
-                tools:src="@drawable/medium_image_director" />
-
-            <LinearLayout
-                android:layout_width="216dp"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_review"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.05"
+                android:textColor="@color/color_main"
+                android:textSize="12sp"
+                tools:text="Пухов Александр Сергеевич" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/user_name_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gothampro_medium"
-                    android:letterSpacing="0.05"
-                    android:textColor="@color/color_main"
-                    android:textSize="12sp"
-                    tools:text="Пухов Александр Сергеевич" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/company_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/gothampro"
-                    android:letterSpacing="0.05"
-                    android:lineHeight="17dp"
-                    android:textColor="@color/color_main"
-                    android:textSize="12sp"
-                    tools:text="Учредитель и руководитель ООО «АЙТИ КРОН»" />
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="17dp"
+                android:maxLines="3"
+                android:textColor="@color/color_main"
+                android:textSize="12sp"
+                tools:text="Учредитель и руководитель ООО «АЙТИ КРОН»" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
