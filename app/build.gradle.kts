@@ -75,4 +75,7 @@ dependencies {
     // AdapterDelegates
     implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2")
     implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2")
+
+    // MaskedEditText
+    implementation("io.github.vicmikhailau:MaskedEditText:5.0.2")
 }

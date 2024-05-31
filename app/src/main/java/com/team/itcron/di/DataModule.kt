@@ -1,16 +1,26 @@
 package com.team.itcron.di
 
 import com.team.itcron.data.network.ApiService
+import com.team.itcron.data.repository.BudgetInFormRepositoryImpl
 import com.team.itcron.data.repository.CaseDetailRepositoryImpl
 import com.team.itcron.data.repository.CaseRepositoryImpl
+import com.team.itcron.data.repository.FileItemRepositoryImpl
 import com.team.itcron.data.repository.FilterRepositoryImpl
+import com.team.itcron.data.repository.FormInfoRepositoryImpl
 import com.team.itcron.data.repository.MenuRepositoryImpl
+import com.team.itcron.data.repository.PlaceRecognitionInFormRepositoryImpl
 import com.team.itcron.data.repository.ReviewRepositoryImpl
+import com.team.itcron.data.repository.ServiceInFormRepositoryImpl
+import com.team.itcron.domain.repository.BudgetInFormRepository
 import com.team.itcron.domain.repository.CaseDetailRepository
 import com.team.itcron.domain.repository.CaseRepository
+import com.team.itcron.domain.repository.FileItemRepository
 import com.team.itcron.domain.repository.FilterRepository
+import com.team.itcron.domain.repository.FormInfoRepository
 import com.team.itcron.domain.repository.MenuRepository
+import com.team.itcron.domain.repository.PlaceRecognitionInFormRepository
 import com.team.itcron.domain.repository.ReviewRepository
+import com.team.itcron.domain.repository.ServiceInFormRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -37,6 +47,26 @@ val dataModule = module {
 
     single<ReviewRepository> {
         ReviewRepositoryImpl(apiService = get())
+    }
+
+    single<ServiceInFormRepository> {
+        ServiceInFormRepositoryImpl()
+    }
+
+    single<BudgetInFormRepository> {
+        BudgetInFormRepositoryImpl()
+    }
+
+    single<PlaceRecognitionInFormRepository> {
+        PlaceRecognitionInFormRepositoryImpl()
+    }
+
+    single<FileItemRepository> {
+        FileItemRepositoryImpl()
+    }
+
+    single<FormInfoRepository> {
+        FormInfoRepositoryImpl(apiService = get())
     }
 
     single<ApiService> {
