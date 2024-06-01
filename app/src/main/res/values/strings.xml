@@ -65,6 +65,9 @@
     <string name="text_is_null_binding_view_send_form_fragment">
         FragmentSendFormBinding is null
     </string>
+    <string name="text_is_null_binding_view_contact_fragment">
+        FragmentContactBinding is null
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -169,5 +172,48 @@
     <string name="text_thanks_form">Спасибо\nза вашу заявку!</string>
     <string name="text_will_contact_you">Мы свяжемся с Вами\nв ближайшее время.</string>
     <string name="text_call_for_call">А если у Вас «горит» и ждать\nнельзя, скорее звоните нам.</string>
+    <string name="text_title_app_bar_contact">Контакты</string>
+    <string name="text_work_schedule">График работы</string>
+    <string name="text_day_monday">Понедельник:</string>
+    <string name="text_work_time">09:00 – 18:00</string>
+    <string name="text_day_tuesday">Вторник:</string>
+    <string name="text_day_wednesday">Среда:</string>
+    <string name="text_day_thursday">Четверг:</string>
+    <string name="text_day_friday">Пятница:</string>
+    <string name="text_day_weekend">Сб - Вс:</string>
+    <string name="text_weekend">Выходной</string>
+    <string name="text_location">Расположение</string>
+    <string name="text_address_company">г. Москва, ул. Мосфильмовская, д. 35, с. 2, офис 301</string>
+    <string name="text_requisites">Реквизиты</string>
+    <string name="text_join_team_second">Присоединяйтесь\nк команде</string>
+    <string name="text_time_zone_msk">Europe/Moscow</string>
+    <string name="text_sharing">Поделиться</string>
+    <string name="text_full_name">Полное наименование</string>
+    <string name="text_OOO">Общество с ограниченной ответственностью «АЙТИ КРОН»</string>
+    <string name="text_abbreviated_name">Сокращенное наименование</string>
+    <string name="text_OOO_value">ООО «АЙТИ КРОН»</string>
+    <string name="text_en_name">Англоязычное наименование</string>
+    <string name="text_en_name_value">«IT CRON» LLC</string>
+    <string name="text_legal_address">Юридический адрес</string>
+    <string name="text_legal_address_value">143025, Московская область, Одинцовский район, село Ромашково, улица Никольская, дом 4, корпус 2, квартира 24</string>
+    <string name="text_postal_address">Почтовый адрес</string>
+    <string name="text_postal_address_value">119330, Москва, улица Мосфильмовская, дом 35, строение 2, офис 301</string>
+    <string name="text_INN">ИНН</string>
+    <string name="text_INN_value">5032302910</string>
+    <string name="text_KPP">КПП</string>
+    <string name="text_KPP_value">503201001</string>
+    <string name="text_OGRN">ОГРН</string>
+    <string name="text_OGRN_value">1195053004068</string>
+    <string name="text_OKPO">ОКПО</string>
+    <string name="text_OKPO_value">35527637</string>
+    <string name="text_R_C">Р/С</string>
+    <string name="text_R_C_value">40702810902720004052</string>
+    <string name="text_bank">Банк</string>
+    <string name="text_bank_value">АО “АЛЬФА-БАНК”, г.Москва</string>
+    <string name="text_BIK">БИК</string>
+    <string name="text_BIK_value">044525593</string>
+    <string name="text_K_S">К/С</string>
+    <string name="text_K_S_value">30101810200000000593</string>
+    <string name="text_general_manager">Генеральный директор</string>
 
 </resources>

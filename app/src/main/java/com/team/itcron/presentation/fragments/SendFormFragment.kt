@@ -886,6 +886,10 @@ class SendFormFragment : Fragment(), KoinComponent {
                     ArrayList(listCase)
                 )
             )
+
+            ContactFragment.NAME_FRAGMENT -> navigateHelper.navigateTo(
+                ContactFragment.newInstance()
+            )
         }
     }
 

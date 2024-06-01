@@ -23,10 +23,12 @@ import com.team.itcron.domain.usecase.PostFormWithFilesUseCase
 import com.team.itcron.domain.usecase.SetSelectionBudgetUseCase
 import com.team.itcron.domain.usecase.SetSelectionPlaceRecognitionUseCase
 import com.team.itcron.domain.usecase.SetSelectionServiceUseCase
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
@@ -76,8 +78,8 @@ class SendFormViewModel(
     private val _formResponse = MutableStateFlow<FormResponse?>(null)
     val formResponse: StateFlow<FormResponse?> = _formResponse.asStateFlow()
 
-    private val _isError = MutableStateFlow<Boolean>(false)
-    val isError: StateFlow<Boolean> = _isError.asStateFlow()
+    private val _isError = Channel<Boolean>(Channel.CONFLATED)
+    val isError = _isError.receiveAsFlow()
 
     private val _formGoodSend = MutableStateFlow<Boolean>(false)
     val formGoodSend: StateFlow<Boolean> = _formGoodSend.asStateFlow()
@@ -178,8 +180,8 @@ class SendFormViewModel(
             postFormUseCase.postForm(formInfo)
                 .catch {
                     when (it) {
-                        is Exception -> _isError.value = true
-                        else -> _isError.value = false
+                        is Exception -> _isError.send(true)
+                        else -> _isError.send(false)
                     }
                 }
                 .collect {
@@ -187,7 +189,7 @@ class SendFormViewModel(
                         _formResponse.value = it
                         _formGoodSend.value = true
                     } else {
-                        _isError.value = true
+                        _isError.send(true)
                     }
                 }
         }
@@ -198,8 +200,8 @@ class SendFormViewModel(
             postFormWithFilesUseCase.postFormWithFiles(formInfo, listFiles)
                 .catch {
                     when (it) {
-                        is Exception -> _isError.value = true
-                        else -> _isError.value = false
+                        is Exception -> _isError.send(true)
+                        else -> _isError.send(false)
                     }
                 }
                 .collect {
@@ -207,7 +209,7 @@ class SendFormViewModel(
                         _formResponse.value = it
                         _formGoodSend.value = true
                     } else {
-                        _isError.value = true
+                        _isError.send(true)
                     }
                 }
         }
