@@ -1,5 +1,7 @@
 package com.team.itcron.data.repository
 
+import android.content.Context
+import com.team.itcron.R
 import com.team.itcron.domain.models.ServiceInForm
 import com.team.itcron.domain.repository.ServiceInFormRepository
 import kotlinx.coroutines.flow.Flow
@@ -7,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 
-class ServiceInFormRepositoryImpl : ServiceInFormRepository {
+class ServiceInFormRepositoryImpl(val context: Context) : ServiceInFormRepository {
 
     private val servicesListInForm = MutableStateFlow<List<ServiceInForm>>(emptyList())
 
@@ -16,16 +18,46 @@ class ServiceInFormRepositoryImpl : ServiceInFormRepository {
     override fun createListServices(): Flow<List<ServiceInForm>> =
         flow<List<ServiceInForm>> {
             servicesListInForm.value = arrayListOf(
-                ServiceInForm("UX-тестирование", false),
-                ServiceInForm("Дизайн моб. приложения", false),
-                ServiceInForm("Дизайн веб-интерфейса", false),
-                ServiceInForm("Веб-разработка и интеграции", false),
-                ServiceInForm("Разработка моб. приложений", false),
-                ServiceInForm("Стратегия", false),
-                ServiceInForm("Креатив", false),
-                ServiceInForm("Аналитика", false),
-                ServiceInForm("Тестирование", false),
-                ServiceInForm("Другое", false),
+                ServiceInForm(
+                    getStringService(R.string.text_ux_testing),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_mobile_application_design),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_web_interface_design),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_web_development_and_integration),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_mobile_application_development),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_strategy),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_creative),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_analytics),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_testing),
+                    false
+                ),
+                ServiceInForm(
+                    getStringService(R.string.text_other),
+                    false
+                ),
             )
             servicesListInForm.collect { emit(it) }
         }
@@ -56,4 +88,8 @@ class ServiceInFormRepositoryImpl : ServiceInFormRepository {
             servicesActiveListInForm.value = listActiveServices.toList()
             servicesActiveListInForm.collect { emit(it) }
         }
+
+    private fun getStringService(idString: Int): String {
+        return context.resources.getString(idString)
+    }
 }

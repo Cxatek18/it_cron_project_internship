@@ -1,5 +1,6 @@
 package com.team.itcron.presentation.adapter_delegation
 
+import androidx.core.content.ContextCompat
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.team.itcron.R
 import com.team.itcron.databinding.ServiceFormItemBinding
@@ -23,17 +24,16 @@ fun serviceInFormDelegate(
     bind {
         with(binding) {
             textService.text = item.title
-            if (item.isActive) {
-                textService.setBackgroundDrawable(
-                    getDrawable(R.drawable.background_active_service_item)
-                )
-                textService.setTextColor(getColor(R.color.white))
-            } else {
-                textService.setBackgroundDrawable(
-                    getDrawable(R.drawable.background_no_active_service_item)
-                )
-                textService.setTextColor(getColor(R.color.color_main))
-            }
+            textService.setBackgroundDrawable(
+                getDrawable(R.drawable.state_form_item)
+            )
+            textService.setTextColor(
+                if (item.isActive)
+                    ContextCompat.getColor(context, R.color.white)
+                else
+                    ContextCompat.getColor(context, R.color.color_main)
+            )
+            textService.isSelected = item.isActive
         }
     }
 }

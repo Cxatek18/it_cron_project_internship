@@ -169,5 +169,27 @@
     <string name="text_thanks_form">Спасибо\nза вашу заявку!</string>
     <string name="text_will_contact_you">Мы свяжемся с Вами\nв ближайшее время.</string>
     <string name="text_call_for_call">А если у Вас «горит» и ждать\nнельзя, скорее звоните нам.</string>
+    <string name="text_social_network">Соцсети</string>
+    <string name="text_recommendations">Рекомендации</string>
+    <string name="text_works">Работы</string>
+    <string name="text_ratings">Рейтинги</string>
+    <string name="text_mailing">Рассылка</string>
+    <string name="text_advertisement">Реклама</string>
+    <string name="text_less_than_500_thousand"> 500 тыс.р.</string>
+    <string name="text_from_500_thousand_to_1_million">0.5 - 1 млн.р.</string>
+    <string name="text_from_1_million_to_3_million">1 - 3 млн.р.</string>
+    <string name="text_from_3_million_to_5_million">3 - 5 млн.р.</string>
+    <string name="text_from_5_million_to_10_million">5 - 10 млн.р.</string>
+    <string name="text_more_than_10_million">10 млн.р.</string>
+    <string name="text_ux_testing">UX-тестирование</string>
+    <string name="text_mobile_application_design">Дизайн моб. приложения</string>
+    <string name="text_web_interface_design">Дизайн веб-интерфейса</string>
+    <string name="text_web_development_and_integration">Веб-разработка и интеграции</string>
+    <string name="text_mobile_application_development">Разработка моб. приложений</string>
+    <string name="text_strategy">Стратегия</string>
+    <string name="text_creative">Креатив</string>
+    <string name="text_analytics">Аналитика</string>
+    <string name="text_testing">Тестирование</string>
+    <string name="text_other">Другое</string>
 
 </resources>

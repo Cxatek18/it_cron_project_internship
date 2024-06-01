@@ -17,11 +17,7 @@ class FileItemRepositoryImpl : FileItemRepository {
         }
 
     override fun addFileItem(fileItem: FileItem) {
-        listFile.update { listFile ->
-            val newList = listFile.toMutableList()
-            newList.add(fileItem)
-            newList.toList()
-        }
+        listFile.update { it + fileItem }
     }
 
     override fun deleteFileItem(fileItem: FileItem) {

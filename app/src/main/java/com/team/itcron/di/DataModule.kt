@@ -50,15 +50,15 @@ val dataModule = module {
     }
 
     single<ServiceInFormRepository> {
-        ServiceInFormRepositoryImpl()
+        ServiceInFormRepositoryImpl(context = get())
     }
 
     single<BudgetInFormRepository> {
-        BudgetInFormRepositoryImpl()
+        BudgetInFormRepositoryImpl(context = get())
     }
 
     single<PlaceRecognitionInFormRepository> {
-        PlaceRecognitionInFormRepositoryImpl()
+        PlaceRecognitionInFormRepositoryImpl(context = get())
     }
 
     single<FileItemRepository> {
