@@ -9,6 +9,7 @@ import com.team.itcron.data.repository.FilterRepositoryImpl
 import com.team.itcron.data.repository.FormInfoRepositoryImpl
 import com.team.itcron.data.repository.MenuRepositoryImpl
 import com.team.itcron.data.repository.PlaceRecognitionInFormRepositoryImpl
+import com.team.itcron.data.repository.RequisiteRepositoryImpl
 import com.team.itcron.data.repository.ReviewRepositoryImpl
 import com.team.itcron.data.repository.ServiceInFormRepositoryImpl
 import com.team.itcron.domain.repository.BudgetInFormRepository
@@ -19,6 +20,7 @@ import com.team.itcron.domain.repository.FilterRepository
 import com.team.itcron.domain.repository.FormInfoRepository
 import com.team.itcron.domain.repository.MenuRepository
 import com.team.itcron.domain.repository.PlaceRecognitionInFormRepository
+import com.team.itcron.domain.repository.RequisiteRepository
 import com.team.itcron.domain.repository.ReviewRepository
 import com.team.itcron.domain.repository.ServiceInFormRepository
 import okhttp3.OkHttpClient
@@ -67,6 +69,10 @@ val dataModule = module {
 
     single<FormInfoRepository> {
         FormInfoRepositoryImpl(apiService = get())
+    }
+
+    single<RequisiteRepository> {
+        RequisiteRepositoryImpl(context = get())
     }
 
     single<ApiService> {
