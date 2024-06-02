@@ -1,5 +1,6 @@
 package com.team.itcron.presentation.adapter_delegation
 
+import androidx.core.content.ContextCompat
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.team.itcron.R
 import com.team.itcron.databinding.BudgetFormItemBinding
@@ -23,17 +24,10 @@ fun budgetInFormDelegate(
     bind {
         with(binding) {
             textBudget.text = item.title
-            if (item.isActive) {
-                textBudget.setBackgroundDrawable(
-                    getDrawable(R.drawable.background_active_service_item)
-                )
-                textBudget.setTextColor(getColor(R.color.white))
-            } else {
-                textBudget.setBackgroundDrawable(
-                    getDrawable(R.drawable.background_no_active_service_item)
-                )
-                textBudget.setTextColor(getColor(R.color.color_main))
-            }
+            textBudget.setBackgroundDrawable(
+                getDrawable(R.drawable.state_form_item)
+            )
+            textBudget.isSelected = item.isActive
         }
     }
 }

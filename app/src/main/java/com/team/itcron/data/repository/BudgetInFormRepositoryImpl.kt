@@ -1,57 +1,66 @@
 package com.team.itcron.data.repository
 
+import android.content.Context
+import com.team.itcron.R
 import com.team.itcron.domain.models.BudgetInForm
 import com.team.itcron.domain.repository.BudgetInFormRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
-class BudgetInFormRepositoryImpl : BudgetInFormRepository {
+class BudgetInFormRepositoryImpl(val context: Context) : BudgetInFormRepository {
 
     private val budgetListInForm = MutableStateFlow<List<BudgetInForm>>(emptyList())
-
-    private val activeBudget = MutableStateFlow<BudgetInForm?>(null)
 
     override fun createListBudgets(): Flow<List<BudgetInForm>> =
         flow<List<BudgetInForm>> {
             budgetListInForm.value = arrayListOf(
-                BudgetInForm("< 500 тыс.р.", false),
-                BudgetInForm("0.5 - 1 млн.р.", false),
-                BudgetInForm("1 - 3 млн.р.", false),
-                BudgetInForm("3 - 5 млн.р.", false),
-                BudgetInForm("5 - 10 млн.р.", false),
-                BudgetInForm("> 10 млн.р.", false),
+                BudgetInForm(
+                    "< ${getStringBudget(R.string.text_less_than_500_thousand)}",
+                    false
+                ),
+                BudgetInForm(
+                    getStringBudget(R.string.text_from_500_thousand_to_1_million),
+                    false
+                ),
+                BudgetInForm(
+                    getStringBudget(R.string.text_from_1_million_to_3_million),
+                    false
+                ),
+                BudgetInForm(
+                    getStringBudget(R.string.text_from_3_million_to_5_million),
+                    false
+                ),
+                BudgetInForm(
+                    getStringBudget(R.string.text_from_5_million_to_10_million),
+                    false
+                ),
+                BudgetInForm(
+                    "> ${getStringBudget(R.string.text_more_than_10_million)}",
+                    false
+                ),
             )
             budgetListInForm.collect { emit(it) }
         }
 
     override fun setSelectionBudget(budgetInForm: BudgetInForm) {
         budgetListInForm.update { listBudgetInForm ->
-            val listBudgetsNoActive = mutableListOf<BudgetInForm>()
-            listBudgetInForm.forEach {
-                listBudgetsNoActive.add(
-                    it.copy(title = it.title, isActive = false)
-                )
+            listBudgetInForm.map {
+                val isActive = if (
+                    it.title == budgetInForm.title
+                ) !budgetInForm.isActive else false
+                it.copy(isActive = isActive)
             }
-            var listNew = listOf<BudgetInForm>()
-            val idx = listBudgetsNoActive.indexOfFirst {
-                it.title == budgetInForm.title
-            }
-            if (idx >= 0) {
-                listBudgetsNoActive[idx] = listBudgetsNoActive[idx]
-                    .copy(isActive = !budgetInForm.isActive)
-                listNew = listBudgetsNoActive.toList()
-            }
-            listNew
         }
     }
 
-    override fun getActiveBudget(): Flow<BudgetInForm?> =
-        flow<BudgetInForm?> {
-            activeBudget.value = budgetListInForm.value.find {
-                it.isActive
-            }
-            activeBudget.collect { emit(it) }
-        }
+    override fun getActiveBudget(): Flow<BudgetInForm?> {
+        return budgetListInForm.map { list -> list.find { it.isActive } }
+    }
+
+    private fun getStringBudget(idString: Int): String {
+        return context.resources.getString(idString)
+    }
 }

@@ -1,22 +1,33 @@
 package com.team.itcron.presentation.adapter_delegation
 
+import androidx.core.content.ContextCompat
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
-import com.team.itcron.databinding.RequisiteItemBinding
-import com.team.itcron.domain.models.Requisite
+import com.team.itcron.R
+import com.team.itcron.databinding.ServiceFormItemBinding
+import com.team.itcron.domain.models.ServiceInForm
 
-fun requisiteDelegate(
-) = adapterDelegateViewBinding<Requisite, Requisite, RequisiteItemBinding>(
+fun serviceInFormDelegate(
+    setSelectionService: (serviceInForm: ServiceInForm) -> Unit
+) = adapterDelegateViewBinding<ServiceInForm, ServiceInForm, ServiceFormItemBinding>(
     { layoutInflater, root ->
-        RequisiteItemBinding.inflate(
+        ServiceFormItemBinding.inflate(
             layoutInflater, root, false
         )
     }
 ) {
+    with(binding) {
+        textService.setOnClickListener {
+            setSelectionService(item)
+        }
+    }
 
     bind {
         with(binding) {
-            textNameRequisite.text = item.name
-            textValueRequisite.text = item.value
+            textService.text = item.title
+            textService.setBackgroundDrawable(
+                getDrawable(R.drawable.state_form_item)
+            )
+            textService.isSelected = item.isActive
         }
     }
 }

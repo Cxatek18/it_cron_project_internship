@@ -1,59 +1,64 @@
 package com.team.itcron.data.repository
 
+import android.content.Context
+import com.team.itcron.R
 import com.team.itcron.domain.models.PlaceRecognitionInForm
 import com.team.itcron.domain.repository.PlaceRecognitionInFormRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
-class PlaceRecognitionInFormRepositoryImpl : PlaceRecognitionInFormRepository {
+class PlaceRecognitionInFormRepositoryImpl(val context: Context) :
+    PlaceRecognitionInFormRepository {
 
     private val placeRecognitionListInForm = MutableStateFlow<List<PlaceRecognitionInForm>>(
         emptyList()
     )
 
-    private val activePlaceRecognition = MutableStateFlow<PlaceRecognitionInForm?>(null)
     override fun createListPlaceRecognition(): Flow<List<PlaceRecognitionInForm>> =
         flow<List<PlaceRecognitionInForm>> {
             placeRecognitionListInForm.value = arrayListOf(
-                PlaceRecognitionInForm("Соцсети", false),
-                PlaceRecognitionInForm("Рекомендации", false),
-                PlaceRecognitionInForm("Работы", false),
-                PlaceRecognitionInForm("Рейтинги", false),
-                PlaceRecognitionInForm("Рассылка", false),
-                PlaceRecognitionInForm("Реклама", false),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_social_network), false
+                ),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_recommendations), false
+                ),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_works), false
+                ),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_ratings), false
+                ),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_mailing), false
+                ),
+                PlaceRecognitionInForm(
+                    getStringPlaceRecognition(R.string.text_advertisement), false
+                ),
             )
             placeRecognitionListInForm.collect { emit(it) }
         }
 
     override fun setSelectionPlaceRecognition(placeRecognitionInForm: PlaceRecognitionInForm) {
         placeRecognitionListInForm.update { placeRecognition ->
-            val listPlaceRecognitionNoActive =
-                mutableListOf<PlaceRecognitionInForm>()
-            placeRecognition.forEach {
-                listPlaceRecognitionNoActive.add(
-                    it.copy(title = it.title, isActive = false)
-                )
+            placeRecognition.map {
+                val isActive = if (
+                    it.title == placeRecognitionInForm.title
+                ) !placeRecognitionInForm.isActive else false
+                it.copy(isActive = isActive)
             }
-            var listNew = listOf<PlaceRecognitionInForm>()
-            val idx = listPlaceRecognitionNoActive.indexOfFirst {
-                it.title == placeRecognitionInForm.title
-            }
-            if (idx >= 0) {
-                listPlaceRecognitionNoActive[idx] = listPlaceRecognitionNoActive[idx]
-                    .copy(isActive = !placeRecognitionInForm.isActive)
-                listNew = listPlaceRecognitionNoActive.toList()
-            }
-            listNew
         }
+
     }
 
-    override fun getActivePlaceRecognition(): Flow<PlaceRecognitionInForm?> =
-        flow<PlaceRecognitionInForm?> {
-            activePlaceRecognition.value = placeRecognitionListInForm.value.find {
-                it.isActive
-            }
-            activePlaceRecognition.collect { emit(it) }
-        }
+    override fun getActivePlaceRecognition(): Flow<PlaceRecognitionInForm?> {
+        return placeRecognitionListInForm.map { list -> list.find { it.isActive } }
+    }
+
+    private fun getStringPlaceRecognition(idString: Int): String {
+        return context.resources.getString(idString)
+    }
 }
