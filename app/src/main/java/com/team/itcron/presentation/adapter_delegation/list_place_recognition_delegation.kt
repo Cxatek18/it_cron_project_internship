@@ -7,7 +7,7 @@ import com.team.itcron.databinding.PlaceRecognitionFormItemBinding
 import com.team.itcron.domain.models.PlaceRecognitionInForm
 
 fun placeRecognitionInFormDelegate(
-    setSelectionBudget: (placeRecognitionInForm: PlaceRecognitionInForm) -> Unit
+    setSelectionPlaceRecognition: (placeRecognitionInForm: PlaceRecognitionInForm) -> Unit
 ) =
     adapterDelegateViewBinding<
             PlaceRecognitionInForm, PlaceRecognitionInForm, PlaceRecognitionFormItemBinding
@@ -20,7 +20,7 @@ fun placeRecognitionInFormDelegate(
     ) {
         with(binding) {
             textPlaceRecognition.setOnClickListener {
-                setSelectionBudget(item)
+                setSelectionPlaceRecognition(item)
             }
         }
 
@@ -29,12 +29,6 @@ fun placeRecognitionInFormDelegate(
                 textPlaceRecognition.text = item.title
                 textPlaceRecognition.background =
                     ContextCompat.getDrawable(context, R.drawable.state_form_item)
-                textPlaceRecognition.setTextColor(
-                    if (item.isActive)
-                        ContextCompat.getColor(context, R.color.white)
-                    else
-                        ContextCompat.getColor(context, R.color.color_main)
-                )
                 textPlaceRecognition.isSelected = item.isActive
             }
         }

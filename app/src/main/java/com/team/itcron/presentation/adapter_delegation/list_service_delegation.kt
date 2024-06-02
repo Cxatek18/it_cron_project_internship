@@ -27,12 +27,6 @@ fun serviceInFormDelegate(
             textService.setBackgroundDrawable(
                 getDrawable(R.drawable.state_form_item)
             )
-            textService.setTextColor(
-                if (item.isActive)
-                    ContextCompat.getColor(context, R.color.white)
-                else
-                    ContextCompat.getColor(context, R.color.color_main)
-            )
             textService.isSelected = item.isActive
         }
     }

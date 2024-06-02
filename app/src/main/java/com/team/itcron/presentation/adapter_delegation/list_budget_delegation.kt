@@ -27,12 +27,6 @@ fun budgetInFormDelegate(
             textBudget.setBackgroundDrawable(
                 getDrawable(R.drawable.state_form_item)
             )
-            textBudget.setTextColor(
-                if (item.isActive)
-                    ContextCompat.getColor(context, R.color.white)
-                else
-                    ContextCompat.getColor(context, R.color.color_main)
-            )
             textBudget.isSelected = item.isActive
         }
     }
