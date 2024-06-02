@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_max_size_dialog">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_ups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/gothampro_bold"
+            android:letterSpacing="0.05"
+            android:text="@string/text_ups"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_went_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gothampro"
+            android:letterSpacing="0.05"
+            android:lineHeight="19dp"
+            android:text="@string/text_went_wrong"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_ups" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gothampro"
+            android:letterSpacing="0.05"
+            android:lineHeight="19dp"
+            android:text="@string/text_repeat"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_went_wrong" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logo_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/phone_call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_repeat" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/phone_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:fontFamily="@font/gothampro_medium"
+            android:letterSpacing="0.05"
+            android:text="@string/text_company_phone"
+            android:textColor="@color/color_main_second"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/logo_phone"
+            app:layout_constraintTop_toBottomOf="@+id/text_repeat" />
+
+        <View
+            android:id="@+id/line_phone"
+            android:layout_width="205dp"
+            android:layout_height="1dp"
+            android:background="@color/color_main_second"
+            app:layout_constraintEnd_toEndOf="@+id/phone_company"
+            app:layout_constraintStart_toStartOf="@+id/phone_company"
+            app:layout_constraintTop_toBottomOf="@+id/phone_company" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_repeat"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/background_btn_ok"
+            android:fontFamily="@font/gothampro_medium"
+            android:letterSpacing="0.05"
+            android:text="@string/text_ok_button"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_company" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

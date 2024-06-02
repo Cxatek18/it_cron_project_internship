@@ -91,6 +91,7 @@ class CompanyFragment : Fragment(), KoinComponent {
         companyViewModel.getReviewInfo()
         changeTextSendPortfolioEmail()
         observeViewModel()
+        listeningOnClickBtnSendForm()
     }
 
     override fun onStop() {
@@ -237,6 +238,12 @@ class CompanyFragment : Fragment(), KoinComponent {
         }
     }
 
+    private fun listeningOnClickBtnSendForm() {
+        binding.buttonSubmitApplication.setOnClickListener {
+            navigateHelper.navigateTo(SendFormFragment.newInstance(NAME_FRAGMENT))
+        }
+    }
+
     private fun listeningOnClickBtnBack() {
         binding.btnBack.setOnClickListener {
             navigateHelper.navigateTo(MainFragment.newInstance())
@@ -333,8 +340,9 @@ class CompanyFragment : Fragment(), KoinComponent {
     }
 
     companion object {
-
+        const val NAME_FRAGMENT = "company"
         private const val TEXT_EMAIL_HR_COMPANY_SIZE = 50f
+
         fun newInstance(): CompanyFragment {
             return CompanyFragment()
         }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_max_size_dialog">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_ups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="130dp"
+            android:fontFamily="@font/gothampro_bold"
+            android:letterSpacing="0.05"
+            android:text="@string/text_ups"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_error_file_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gothampro"
+            android:letterSpacing="0.05"
+            android:lineHeight="19dp"
+            android:text="@string/text_error_file_size"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_ups" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_repeat_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gothampro"
+            android:letterSpacing="0.05"
+            android:lineHeight="19dp"
+            android:text="@string/text_repeat_download"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_error_file_size" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_repeat_download_file"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/background_btn_ok"
+            android:fontFamily="@font/gothampro_medium"
+            android:letterSpacing="0.05"
+            android:text="@string/text_ok_button"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_repeat_download" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

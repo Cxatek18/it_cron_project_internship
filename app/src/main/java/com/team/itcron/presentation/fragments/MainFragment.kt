@@ -52,6 +52,7 @@ class MainFragment : Fragment() {
         listeningOnClickPoints()
         listeningOnClickEmailCompany()
         listeningOnClickCompanyLink()
+        listeningOnClickBtnSendForm()
     }
 
     override fun onDestroy() {
@@ -59,8 +60,13 @@ class MainFragment : Fragment() {
         _binding = null
         requireActivity().finish()
     }
-
     // ****** lifecycle *****
+
+    private fun listeningOnClickBtnSendForm() {
+        binding.btnSendRequest.setOnClickListener {
+            navigateHelper.navigateTo(SendFormFragment.newInstance(NAME_FRAGMENT))
+        }
+    }
 
     private fun listeningOnClickCompanyLink() {
         with(binding) {
@@ -176,6 +182,8 @@ class MainFragment : Fragment() {
     }
 
     companion object {
+        const val NAME_FRAGMENT = "main"
+
         fun newInstance(): MainFragment {
             return MainFragment()
         }

@@ -113,6 +113,7 @@ class CaseDetailFragment : Fragment(), KoinComponent {
         listeningOnClickEmailCompany()
         listeningOnClickGoGeneralPage()
         listeningOnClickBtnBack()
+        listeningOnClickBtnSendForm()
     }
 
     override fun onDestroyView() {
@@ -242,6 +243,19 @@ class CaseDetailFragment : Fragment(), KoinComponent {
         }
     }
 
+    private fun listeningOnClickBtnSendForm() {
+        binding.buttonSubmitApplication.setOnClickListener {
+            navigateHelper.navigateTo(
+                SendFormFragment.newInstance(
+                    NAME_FRAGMENT,
+                    caseId,
+                    caseImage,
+                    ArrayList(listCase)
+                )
+            )
+        }
+    }
+
     private fun listeningOnClickScreenshot() {
         navigateHelper.navigateTo(
             ScreenshotListFragment.newInstance(
@@ -316,6 +330,7 @@ class CaseDetailFragment : Fragment(), KoinComponent {
     }
 
     companion object {
+        const val NAME_FRAGMENT = "case_detail"
         private const val EXTRA_CASE_ID = "case_id"
         private const val EXTRA_CASE_IMAGE = "case_image"
         private const val EXTRA_CASES = "cases"

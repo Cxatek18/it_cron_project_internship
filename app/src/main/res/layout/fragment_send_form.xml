@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main"
+    android:backgroundTint="@color/color_main"
+    tools:context=".presentation.fragments.SendFormFragment">
+
+    <LinearLayout
+        android:id="@+id/appbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background_appbar_case_detail"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:paddingStart="22dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/gothampro_bold"
+            android:letterSpacing="0.05"
+            android:text="@string/text_application"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_fill_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="86dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/gothampro_bold"
+                android:lineHeight="42dp"
+                android:text="@string/text_fill_brief"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cube_small_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
+                android:src="@drawable/cube_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_fill_brief"
+                app:layout_constraintTop_toBottomOf="@+id/text_fill_brief" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_leave_request_call"
+                android:layout_width="291dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="19dp"
+                android:text="@string/text_leave_request_call"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_fill_brief" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_phone_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="19dp"
+                android:text="@string/text_company_phone"
+                android:textColor="@color/color_main_second"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_leave_request_call" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cube_small_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:src="@drawable/cube_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_phone_company" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="51dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_services"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cube_small_second" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_services"
+                tools:listitem="@layout/service_form_item" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_budget"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_services" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_budgets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_budget"
+                tools:listitem="@layout/service_form_item" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:paddingBottom="24dp"
+                android:text="@string/text_task"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_budgets" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hint_edit_text_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/hint_task_in_form"
+                android:textColor="@color/color_text_hint"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_task" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:backgroundTint="@color/color_text_hint"
+                android:fontFamily="@font/gothampro"
+                android:hint="@string/hint_task_in_form"
+                android:inputType="textMultiLine"
+                android:maxLength="250"
+                android:paddingBottom="24dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hint_edit_text_task" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_empty_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/text_empty_task"
+                android:textColor="@color/color_text_error_form"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_task" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_file"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginVertical="24dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_empty_task"
+                tools:listitem="@layout/file_item" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/background_btn_download_file"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_attach_file"
+                android:textAllCaps="false"
+                android:textColor="@color/color_main"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_file" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_optional_attach_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="17dp"
+                android:text="@string/text_optional_attach_file"
+                android:textColor="@color/color_text_optional_attach_file"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_download" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_contact_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:paddingBottom="32dp"
+                android:text="@string/text_contact_information"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_optional_attach_file" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hint_edit_text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/hint_name_in_form"
+                android:textColor="@color/color_text_hint"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_contact_information" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:backgroundTint="@color/color_text_hint"
+                android:fontFamily="@font/gothampro"
+                android:hint="@string/hint_name_in_form"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:paddingBottom="12dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hint_edit_text_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_empty_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/text_empty_task"
+                android:textColor="@color/color_text_error_form"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hint_edit_text_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/hint_company_in_form"
+                android:textColor="@color/color_text_hint"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/edit_text_company"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/color_text_hint"
+                android:fontFamily="@font/gothampro"
+                android:hint="@string/hint_company_in_form"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:paddingBottom="12dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_empty_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_empty_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/text_empty_task"
+                android:textColor="@color/color_text_error_form"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_company" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hint_edit_text_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/hint_email_in_form"
+                android:textColor="@color/color_text_hint"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/edit_text_email"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/color_text_hint"
+                android:fontFamily="@font/gothampro"
+                android:hint="@string/hint_email_in_form"
+                android:inputType="textEmailAddress"
+                android:maxLength="32"
+                android:paddingBottom="12dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_company" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_empty_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothampro"
+                android:paddingBottom="20dp"
+                android:text="@string/text_empty_task"
+                android:textColor="@color/color_text_error_form"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hint_edit_text_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/hint_phone_in_form"
+                android:textColor="@color/color_text_hint"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/edit_text_phone"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.vicmikhailau.maskededittext.MaskedEditText
+                android:id="@+id/edit_text_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/color_text_hint"
+                android:fontFamily="@font/gothampro"
+                android:hint="@string/hint_phone_in_form"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:paddingBottom="12dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_text_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_email"
+                app:mask="+7(###)-###-##-##" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_empty_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothampro"
+                android:text="@string/text_empty_task"
+                android:textColor="@color/color_text_error_form"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_phone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_how_did_you_find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="29dp"
+                android:text="@string/text_how_did_you_find"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_empty_phone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_place_recognition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_how_did_you_find"
+                tools:listitem="@layout/service_form_item" />
+
+            <LinearLayout
+                android:id="@+id/block_personal_data"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:gravity="start"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_place_recognition">
+
+                <CheckBox
+                    android:id="@+id/check_personal_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_check_box_selector"
+                    android:checked="false" />
+
+                <TextView
+                    android:id="@+id/text_personal_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/gothampro"
+                    android:letterSpacing="0.03"
+                    android:lineHeight="19dp"
+                    android:text="@string/text_personal_data"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:gravity="start"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_personal_data">
+
+                <CheckBox
+                    android:id="@+id/check_privacy_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight="1"
+                    android:button="@drawable/custom_check_box_selector"
+                    android:checked="false" />
+
+                <TextView
+                    android:id="@+id/text_privacy_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/gothampro"
+                    android:letterSpacing="0.03"
+                    android:lineHeight="19dp"
+                    android:text="@string/text_privacy_policy"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_send_form"
+                android:layout_width="204dp"
+                android:layout_height="204dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="64dp"
+                android:background="@drawable/background_btn_send_request_no_active"
+                android:clickable="false"
+                android:enabled="false"
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.07"
+                android:lineHeight="29dp"
+                android:text="@string/text_send_request"
+                android:textColor="@color/color_text_btn_no_active"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_privacy_policy" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
