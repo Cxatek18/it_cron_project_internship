@@ -158,6 +158,7 @@ class MainFragment : Fragment() {
             textContacts.setOnClickListener {
                 setColorTheWhiteAllPoints()
                 setColorText(textContacts, R.color.color_text_click)
+                navigateHelper.navigateTo(ContactFragment.newInstance())
             }
         }
     }

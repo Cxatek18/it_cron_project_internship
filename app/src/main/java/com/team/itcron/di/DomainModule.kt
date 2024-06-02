@@ -18,6 +18,7 @@ import com.team.itcron.domain.usecase.GetCaseDetailUseCase
 import com.team.itcron.domain.usecase.GetCaseToListUseCase
 import com.team.itcron.domain.usecase.GetFilterToCategoryListUseCase
 import com.team.itcron.domain.usecase.GetListFileItemUseCase
+import com.team.itcron.domain.usecase.GetListRequisiteUseCase
 import com.team.itcron.domain.usecase.GetListReviewUseCase
 import com.team.itcron.domain.usecase.GetMenuUseCase
 import com.team.itcron.domain.usecase.PostFormUseCase
@@ -132,5 +133,9 @@ val domainModule = module {
 
     factory<ClearListFileItemUseCase> {
         ClearListFileItemUseCase(repository = get())
+    }
+
+    factory<GetListRequisiteUseCase> {
+        GetListRequisiteUseCase(repository = get())
     }
 }

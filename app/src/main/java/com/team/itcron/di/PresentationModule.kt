@@ -6,6 +6,7 @@ import com.github.terrakok.cicerone.Router
 import com.team.itcron.presentation.activity.NetworkChecker
 import com.team.itcron.presentation.view_models.CaseDetailViewModel
 import com.team.itcron.presentation.view_models.CompanyViewModel
+import com.team.itcron.presentation.view_models.ContactViewModel
 import com.team.itcron.presentation.view_models.ListCaseViewModel
 import com.team.itcron.presentation.view_models.ListFilterViewModel
 import com.team.itcron.presentation.view_models.MainViewModel
@@ -66,6 +67,12 @@ val presentationModule = module {
             postFormUseCase = get(),
             postFormWithFilesUseCase = get(),
             clearListFileItemUseCase = get()
+        )
+    }
+
+    viewModel<ContactViewModel> {
+        ContactViewModel(
+            getListRequisiteUseCase = get()
         )
     }
 
