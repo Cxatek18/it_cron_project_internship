@@ -1,6 +1,5 @@
 package com.team.itcron.presentation.fragments
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.util.Calendar
@@ -14,7 +13,6 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.buildSpannedString
@@ -288,26 +286,15 @@ class ContactFragment : Fragment(), KoinComponent {
     }
 
     private fun callPhoneCompany() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CALL_PHONE),
-                REQUEST_CODE_CALL
-            )
-        } else {
-            val intent = Intent(Intent.ACTION_CALL)
-            val number = getString(R.string.text_company_phone)
-            intent.data = Uri.parse("tel:$number")
-            startActivity(intent)
-        }
+        val intent = Intent(Intent.ACTION_DIAL)
+        val number = getString(R.string.text_company_phone)
+        intent.data = Uri.parse("tel:$number")
+        startActivity(intent)
     }
 
     companion object {
         const val NAME_FRAGMENT = "contact"
 
-        private const val REQUEST_CODE_CALL = 10
         private const val TEXT_EMAIL_HR_COMPANY_SIZE = 50f
 
         fun newInstance(): ContactFragment {
