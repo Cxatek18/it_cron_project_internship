@@ -9,6 +9,7 @@ import com.team.itcron.presentation.view_models.CompanyViewModel
 import com.team.itcron.presentation.view_models.ListCaseViewModel
 import com.team.itcron.presentation.view_models.ListFilterViewModel
 import com.team.itcron.presentation.view_models.MainViewModel
+import com.team.itcron.presentation.view_models.SendFormViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -45,6 +46,26 @@ val presentationModule = module {
     viewModel<CompanyViewModel> {
         CompanyViewModel(
             getListReviewUseCase = get()
+        )
+    }
+
+    viewModel<SendFormViewModel> {
+        SendFormViewModel(
+            createListServicesUseCase = get(),
+            setSelectionServiceUseCase = get(),
+            formingListActiveServiceUseCase = get(),
+            createListBudgetsUseCase = get(),
+            setSelectionBudgetUseCase = get(),
+            getActiveBudgetUseCase = get(),
+            createListPlaceRecognitionUseCase = get(),
+            setSelectionPlaceRecognitionUseCase = get(),
+            getActivePlaceRecognitionUseCase = get(),
+            getListFileItemUseCase = get(),
+            addFileItemUseCase = get(),
+            deleteFileItemUseCase = get(),
+            postFormUseCase = get(),
+            postFormWithFilesUseCase = get(),
+            clearListFileItemUseCase = get()
         )
     }
 

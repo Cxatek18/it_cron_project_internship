@@ -17,4 +17,20 @@
     <color name="color_line_company_fragment">#4F4F4F</color>
     <color name="color_line_company">#333333</color>
     <color name="color_no_active_dot">#E0E0E0</color>
+    <color name="color_text_hint">#828282</color>
+    <color name="color_text_error_form">#EB5757</color>
+    <color name="color_text_optional_attach_file">#828282</color>
+    <color name="color_background_btn_no_active">#873B2A</color>
+    <color name="color_text_btn_no_active">#898888</color>
+    <color name="color_transparent">#00FFFFFF</color>
+    <color name="color_line_dialog_download">#80111111</color>
+    <color name="color_pdf_file">#F15922</color>
+    <color name="color_doc_file">#4084C8</color>
+    <color name="color_xls_file">#4CAF50</color>
+    <color name="color_txt_file">#616161</color>
+    <color name="color_zip_file">#F1B322</color>
+    <color name="color_img_file">#945DED</color>
+    <color name="color_file_name">#828282</color>
+    <color name="color_background_btn_download_no_active">#80A6A6A6</color>
+    <color name="color_background_max_size_dialog">#E6131212</color>
 </resources>
