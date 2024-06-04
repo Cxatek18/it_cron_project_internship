@@ -2,14 +2,16 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
-    namespace = "com.team.itcron"
+    namespace = "ru.it_cron.intern3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.team.itcron"
+        applicationId = "ru.it_cron.intern3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -78,4 +80,9 @@ dependencies {
 
     // MaskedEditText
     implementation("io.github.vicmikhailau:MaskedEditText:5.0.2")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 }
