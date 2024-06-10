@@ -1,6 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <style name="Base.Theme.ITCRON" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-         <item name="colorPrimary">@color/color_main</item>
+        <item name="colorPrimary">@color/color_main</item>
+        <item name="colorPrimaryDark">@color/color_main</item>
     </style>
 
     <style name="Theme.ITCRON" parent="Base.Theme.ITCRON" />

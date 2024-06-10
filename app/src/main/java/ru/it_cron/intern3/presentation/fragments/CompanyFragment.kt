@@ -23,6 +23,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
 import ru.it_cron.intern3.R
 import ru.it_cron.intern3.databinding.FragmentCompanyBinding
 import ru.it_cron.intern3.domain.models.Review
@@ -30,10 +34,6 @@ import ru.it_cron.intern3.presentation.adapter_delegation.ReviewDiffCallback
 import ru.it_cron.intern3.presentation.adapter_delegation.reviewDelegate
 import ru.it_cron.intern3.presentation.navigate.NavigateHelper
 import ru.it_cron.intern3.presentation.view_models.CompanyViewModel
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.KoinComponent
 
 class CompanyFragment : Fragment(), KoinComponent {
 
@@ -92,6 +92,7 @@ class CompanyFragment : Fragment(), KoinComponent {
         changeTextSendPortfolioEmail()
         observeViewModel()
         listeningOnClickBtnSendForm()
+        listeningOnClickPhoneCompany()
     }
 
     override fun onStop() {
@@ -250,6 +251,12 @@ class CompanyFragment : Fragment(), KoinComponent {
         }
     }
 
+    private fun listeningOnClickPhoneCompany() {
+        binding.textPhoneCompany.setOnClickListener {
+            callPhoneCompany()
+        }
+    }
+
     private fun listeningOnClickCompanyLink() {
         with(binding) {
             facebookLogo.setOnClickListener {
@@ -337,6 +344,13 @@ class CompanyFragment : Fragment(), KoinComponent {
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
+    }
+
+    private fun callPhoneCompany() {
+        val intent = Intent(Intent.ACTION_DIAL)
+        val number = getString(R.string.text_company_phone)
+        intent.data = Uri.parse("tel:$number")
+        startActivity(intent)
     }
 
     companion object {

@@ -15,6 +15,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
 import ru.it_cron.intern3.R
 import ru.it_cron.intern3.databinding.FragmentCaseDetailBinding
 import ru.it_cron.intern3.domain.models.Case
@@ -29,10 +33,6 @@ import ru.it_cron.intern3.presentation.adapter_delegation.casePlatformDelegate
 import ru.it_cron.intern3.presentation.adapter_delegation.caseTechnologyDelegate
 import ru.it_cron.intern3.presentation.navigate.NavigateHelper
 import ru.it_cron.intern3.presentation.view_models.CaseDetailViewModel
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.KoinComponent
 
 class CaseDetailFragment : Fragment(), KoinComponent {
 
@@ -228,12 +228,24 @@ class CaseDetailFragment : Fragment(), KoinComponent {
             }
             if (androidUrl.isNullOrEmpty()) {
                 binding.btnPlayMarket.visibility = View.GONE
+            } else {
+                binding.btnPlayMarket.setOnClickListener {
+                    goingToSite(androidUrl)
+                }
             }
             if (iosUrl.isNullOrEmpty()) {
                 binding.btnAppStore.visibility = View.GONE
+            } else {
+                binding.btnAppStore.setOnClickListener {
+                    goingToSite(iosUrl)
+                }
             }
             if (webUrl.isNullOrEmpty()) {
                 binding.btnWebsiteBlock.visibility = View.GONE
+            } else {
+                binding.btnWebsiteBlock.setOnClickListener {
+                    goingToSite(webUrl)
+                }
             }
             if (caseColor?.isNotEmpty() == true) {
                 val color: Int = Color.parseColor("#${caseColor}")
@@ -307,6 +319,16 @@ class CaseDetailFragment : Fragment(), KoinComponent {
         requireActivity().onBackPressedDispatcher.addCallback {
             navigateHelper.navigateTo(ListCaseFragment.newInstance())
         }
+    }
+
+    private fun goingToSite(url: String?) {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW, Uri.parse(
+                    url
+                )
+            )
+        )
     }
 
     private fun parseArgs() {
