@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main"
+    tools:context=".presentation.fragments.ReviewListFragment">
+
+    <LinearLayout
+        android:id="@+id/appbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background_appbar"
+        android:backgroundTint="@color/color_background_appbar"
+        android:elevation="3dp"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="21dp"
+            android:elevation="3dp"
+            android:src="@drawable/arrow_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_appbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="21dp"
+            android:layout_weight="1"
+            android:elevation="3dp"
+            android:fontFamily="@font/gothampro_bold"
+            android:text="@string/text_title_app_bar_review_list"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="88dp"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/review_item_detail" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/first_ellipse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ellipse_first_in_case"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/list_review" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/second_ellipse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="61dp"
+                android:src="@drawable/ellipse_second_in_case"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_ellipse" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/third_ellipse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:src="@drawable/ellipse_third_in_case"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/second_ellipse" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_more_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_more_review"
+                android:textColor="@color/color_main_second"
+                android:textSize="24sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_review" />
+
+            <View
+                android:id="@+id/line_text_more_review"
+                android:layout_width="185dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="-3dp"
+                android:background="@color/color_main_second"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/text_more_review"
+                app:layout_constraintStart_toStartOf="@+id/text_more_review"
+                app:layout_constraintTop_toBottomOf="@+id/text_more_review" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_become_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:lineHeight="24dp"
+                android:text="@string/text_become_customer"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_text_more_review" />
+
+            <View
+                android:id="@+id/vertical_stick"
+                android:layout_width="2dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_become_customer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:letterSpacing="0.07"
+                android:text="@string/text_email_company"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vertical_stick" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_submit_application"
+                android:layout_width="204dp"
+                android:layout_height="204dp"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/background_btn_send_request_case_detail"
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.07"
+                android:lineHeight="29dp"
+                android:text="@string/text_send_request"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email_company" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/company_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:letterSpacing="0.05"
+                android:text="@string/text_company_city"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_submit_application" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/company_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:lineHeight="24dp"
+                android:text="@string/text_company_location"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_city" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_phone_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/gothampro_medium"
+                android:text="@string/text_company_phone"
+                android:textAlignment="center"
+                android:textColor="@color/color_main_second"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_location" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_contact_via"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/gothampro"
+                android:letterSpacing="0.05"
+                android:text="@string/text_contact_via"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_phone_company" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/link_telegram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="64dp"
+                android:src="@drawable/telegram_big"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_contact_via" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

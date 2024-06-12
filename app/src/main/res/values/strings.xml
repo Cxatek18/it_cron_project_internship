@@ -68,6 +68,9 @@
     <string name="text_is_null_binding_view_contact_fragment">
         FragmentContactBinding is null
     </string>
+    <string name="text_is_null_binding_view_review_list_fragment">
+        FragmentReviewListBinding is null
+    </string>
     <!--  string fragments  -->
 
     <string name="text_header_slogan">Проектно-продуктовый подход\nк оказанию IT-услуг</string>
@@ -237,5 +240,10 @@
     <string name="text_analytics">Аналитика</string>
     <string name="text_testing">Тестирование</string>
     <string name="text_other">Другое</string>
+    <string name="text_title_app_bar_review_list">Отзывы</string>
+    <string name="text_watch_more">Читать полностью</string>
+    <string name="text_more_review">Показать ещё</string>
+    <string name="text_hide_information">Скрыть</string>
+    <string name="count_max_lines_review_text">5</string>
 
 </resources>
