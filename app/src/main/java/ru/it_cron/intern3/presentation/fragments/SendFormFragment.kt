@@ -41,6 +41,12 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinComponent
 import ru.it_cron.intern3.R
 import ru.it_cron.intern3.databinding.FragmentSendFormBinding
 import ru.it_cron.intern3.domain.models.BudgetInForm
@@ -59,12 +65,6 @@ import ru.it_cron.intern3.presentation.adapter_delegation.placeRecognitionInForm
 import ru.it_cron.intern3.presentation.adapter_delegation.serviceInFormDelegate
 import ru.it_cron.intern3.presentation.navigate.NavigateHelper
 import ru.it_cron.intern3.presentation.view_models.SendFormViewModel
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.component.KoinComponent
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import kotlin.math.roundToInt
@@ -889,6 +889,10 @@ class SendFormFragment : Fragment(), KoinComponent {
 
             ContactFragment.NAME_FRAGMENT -> navigateHelper.navigateTo(
                 ContactFragment.newInstance()
+            )
+
+            ReviewListFragment.NAME_FRAGMENT -> navigateHelper.navigateTo(
+                ReviewListFragment.newInstance()
             )
         }
     }

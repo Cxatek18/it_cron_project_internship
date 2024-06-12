@@ -3,6 +3,8 @@ package ru.it_cron.intern3.di
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import ru.it_cron.intern3.presentation.activity.NetworkChecker
 import ru.it_cron.intern3.presentation.view_models.CaseDetailViewModel
 import ru.it_cron.intern3.presentation.view_models.CompanyViewModel
@@ -10,9 +12,8 @@ import ru.it_cron.intern3.presentation.view_models.ContactViewModel
 import ru.it_cron.intern3.presentation.view_models.ListCaseViewModel
 import ru.it_cron.intern3.presentation.view_models.ListFilterViewModel
 import ru.it_cron.intern3.presentation.view_models.MainViewModel
+import ru.it_cron.intern3.presentation.view_models.ReviewListViewModel
 import ru.it_cron.intern3.presentation.view_models.SendFormViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 
 val presentationModule = module {
 
@@ -73,6 +74,14 @@ val presentationModule = module {
     viewModel<ContactViewModel> {
         ContactViewModel(
             getListRequisiteUseCase = get()
+        )
+    }
+
+    viewModel<ReviewListViewModel> {
+        ReviewListViewModel(
+            getListReviewUseCase = get(),
+            getFirstReviewsUseCase = get(),
+            getMoreReviewUseCase = get()
         )
     }
 

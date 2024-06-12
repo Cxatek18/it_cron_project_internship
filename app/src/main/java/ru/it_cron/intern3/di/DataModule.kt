@@ -1,5 +1,10 @@
 package ru.it_cron.intern3.di
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import ru.it_cron.intern3.data.network.ApiService
 import ru.it_cron.intern3.data.repository.BudgetInFormRepositoryImpl
 import ru.it_cron.intern3.data.repository.CaseDetailRepositoryImpl
@@ -10,6 +15,7 @@ import ru.it_cron.intern3.data.repository.FormInfoRepositoryImpl
 import ru.it_cron.intern3.data.repository.MenuRepositoryImpl
 import ru.it_cron.intern3.data.repository.PlaceRecognitionInFormRepositoryImpl
 import ru.it_cron.intern3.data.repository.RequisiteRepositoryImpl
+import ru.it_cron.intern3.data.repository.ReviewListRepositoryImpl
 import ru.it_cron.intern3.data.repository.ReviewRepositoryImpl
 import ru.it_cron.intern3.data.repository.ServiceInFormRepositoryImpl
 import ru.it_cron.intern3.domain.repository.BudgetInFormRepository
@@ -21,13 +27,9 @@ import ru.it_cron.intern3.domain.repository.FormInfoRepository
 import ru.it_cron.intern3.domain.repository.MenuRepository
 import ru.it_cron.intern3.domain.repository.PlaceRecognitionInFormRepository
 import ru.it_cron.intern3.domain.repository.RequisiteRepository
+import ru.it_cron.intern3.domain.repository.ReviewListRepository
 import ru.it_cron.intern3.domain.repository.ReviewRepository
 import ru.it_cron.intern3.domain.repository.ServiceInFormRepository
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 val dataModule = module {
 
@@ -73,6 +75,10 @@ val dataModule = module {
 
     single<RequisiteRepository> {
         RequisiteRepositoryImpl(context = get())
+    }
+
+    single<ReviewListRepository> {
+        ReviewListRepositoryImpl()
     }
 
     single<ApiService> {
