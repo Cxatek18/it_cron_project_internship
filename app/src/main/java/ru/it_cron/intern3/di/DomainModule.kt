@@ -1,5 +1,6 @@
 package ru.it_cron.intern3.di
 
+import org.koin.dsl.module
 import ru.it_cron.intern3.domain.usecase.AddFileItemUseCase
 import ru.it_cron.intern3.domain.usecase.AddFiltersToListActiveFilterUseCase
 import ru.it_cron.intern3.domain.usecase.ClearFilterListUseCase
@@ -17,17 +18,18 @@ import ru.it_cron.intern3.domain.usecase.GetActivePlaceRecognitionUseCase
 import ru.it_cron.intern3.domain.usecase.GetCaseDetailUseCase
 import ru.it_cron.intern3.domain.usecase.GetCaseToListUseCase
 import ru.it_cron.intern3.domain.usecase.GetFilterToCategoryListUseCase
+import ru.it_cron.intern3.domain.usecase.GetFirstReviewsUseCase
 import ru.it_cron.intern3.domain.usecase.GetListFileItemUseCase
 import ru.it_cron.intern3.domain.usecase.GetListRequisiteUseCase
 import ru.it_cron.intern3.domain.usecase.GetListReviewUseCase
 import ru.it_cron.intern3.domain.usecase.GetMenuUseCase
+import ru.it_cron.intern3.domain.usecase.GetMoreReviewUseCase
 import ru.it_cron.intern3.domain.usecase.PostFormUseCase
 import ru.it_cron.intern3.domain.usecase.PostFormWithFilesUseCase
 import ru.it_cron.intern3.domain.usecase.SetSelectionBudgetUseCase
 import ru.it_cron.intern3.domain.usecase.SetSelectionFilterUseCase
 import ru.it_cron.intern3.domain.usecase.SetSelectionPlaceRecognitionUseCase
 import ru.it_cron.intern3.domain.usecase.SetSelectionServiceUseCase
-import org.koin.dsl.module
 
 val domainModule = module {
 
@@ -137,5 +139,13 @@ val domainModule = module {
 
     factory<GetListRequisiteUseCase> {
         GetListRequisiteUseCase(repository = get())
+    }
+
+    factory<GetFirstReviewsUseCase> {
+        GetFirstReviewsUseCase(repository = get())
+    }
+
+    factory<GetMoreReviewUseCase> {
+        GetMoreReviewUseCase(repository = get())
     }
 }

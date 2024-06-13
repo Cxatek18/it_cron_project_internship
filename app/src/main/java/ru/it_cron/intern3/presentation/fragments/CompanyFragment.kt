@@ -93,6 +93,7 @@ class CompanyFragment : Fragment(), KoinComponent {
         observeViewModel()
         listeningOnClickBtnSendForm()
         listeningOnClickPhoneCompany()
+        listeningOnClickWatchReview()
     }
 
     override fun onStop() {
@@ -198,6 +199,12 @@ class CompanyFragment : Fragment(), KoinComponent {
             append(link, clickableSpan, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         textView.text = spannable
+    }
+
+    private fun listeningOnClickWatchReview() {
+        binding.blockWatchLater.setOnClickListener {
+            navigateHelper.navigateTo(ReviewListFragment.newInstance())
+        }
     }
 
     private fun listeningChangeViewPager(dots: Array<ImageView>) {
