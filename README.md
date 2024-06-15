@@ -15,7 +15,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.it-cron.ru/internship/android3.git
+git remote add origin https://github.com/Cxatek18/it_cron_project_internship/tree/develop
 git branch -M master
 git push -uf origin master
 ```
