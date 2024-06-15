@@ -1,4 +1,4 @@
-firebase_app_id = "1:819262624746:android:3ffaea56ed8918c9e19893"
+firebase_app_id = "token"
 
 default_platform :android
 
